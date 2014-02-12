@@ -1,0 +1,8 @@
+C:\Users\USER\Documents\Visual Studio 2010\Projects\OrderNumberGen\OrderNumberGen\bin\Debug\OrderNumberGen.exe
+C:\Users\USER\Documents\Visual Studio 2010\Projects\OrderNumberGen\OrderNumberGen\bin\Debug\OrderNumberGen.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\OrderNumberGen\OrderNumberGen\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\USER\Documents\Visual Studio 2010\Projects\OrderNumberGen\OrderNumberGen\obj\x86\Debug\OrderNumberGen.exe
+C:\Users\USER\Documents\Visual Studio 2010\Projects\OrderNumberGen\OrderNumberGen\obj\x86\Debug\OrderNumberGen.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\OrderNumberGen\OrderNumberGen\bin\Debug\EntityFramework.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\OrderNumberGen\OrderNumberGen\bin\Debug\OrderNumberGen.exe.config
+C:\Users\USER\Documents\Visual Studio 2010\Projects\OrderNumberGen\OrderNumberGen\bin\Debug\EntityFramework.Extended.dll
