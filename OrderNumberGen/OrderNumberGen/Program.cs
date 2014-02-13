@@ -11,6 +11,18 @@ namespace OrderNumberGen
     {
         static void Main(string[] args)
         {
+            string custIdStr = 23.ToString();
+            if (custIdStr.Length > 4)
+            {
+                custIdStr = custIdStr.Substring(custIdStr.Length - 4, 4);
+            }
+            else
+            {
+                custIdStr = custIdStr.PadLeft(4, '0');
+            }
+            string t = string.Format("{0}{1:yyMMdd}{2:000000}{3}", 1, DateTime.Now, 345, custIdStr);
+            Console.WriteLine(t);
+
             //LockOrderNumberGenTest.Test();
 
             //DBOrderNumberGen gen = new DBOrderNumberGen();
@@ -28,8 +40,8 @@ namespace OrderNumberGen
             //TestDBOrderNumberGen2.Test();
 
 
-            ShowLog(10);
-            
+            //ShowLog(10);
+
             Console.ReadKey();
         }
 
