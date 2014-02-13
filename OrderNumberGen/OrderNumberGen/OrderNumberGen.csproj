@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBOrderNumberGen.cs" />
+    <Compile Include="DBOrderNumberGen2.cs" />
     <Compile Include="LockOrderNumberGen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

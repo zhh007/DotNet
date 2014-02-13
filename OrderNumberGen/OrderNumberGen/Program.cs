@@ -11,21 +11,6 @@ namespace OrderNumberGen
     {
         static void Main(string[] args)
         {
-            foreach (var item in LockOrderNumberGen.randomPermutation(0, 9))
-            {
-                Console.Write(item);
-                Console.Write(",");
-            }
-            Console.WriteLine("");
-
-            foreach (var item in LockOrderNumberGen.randomPermutation(0, 9))
-            {
-                Console.Write(item);
-                Console.Write(",");
-            }
-            Console.WriteLine("");
-
-
             //LockOrderNumberGenTest.Test();
 
             //DBOrderNumberGen gen = new DBOrderNumberGen();
@@ -35,16 +20,24 @@ namespace OrderNumberGen
 
             //TestDBOrderNumberGen.Test();
 
-            //ShowLog();
+            //DBOrderNumberGen2 gen2 = new DBOrderNumberGen2();
+            //Console.WriteLine(gen2.Gen(12345));
+
+            //Console.WriteLine(gen2.Gen(12345));
+
+            //TestDBOrderNumberGen2.Test();
+
+
+            ShowLog(10);
             
             Console.ReadKey();
         }
 
-        static void ShowLog()
+        static void ShowLog(int max)
         {
             //统计
             List<LogLine> list = new List<LogLine>();
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < max; i++)
             {
                 using (FileStream fs = new FileStream(string.Format("on_{0}.txt", i), FileMode.Open))
                 using (StreamReader sr = new StreamReader(fs))

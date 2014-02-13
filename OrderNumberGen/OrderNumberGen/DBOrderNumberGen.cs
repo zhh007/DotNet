@@ -150,10 +150,12 @@ namespace OrderNumberGen
         }
 
         public DbSet<OrderNumberSeed> OrderNumberSeeds { get; set; }
+        public DbSet<OrderNumberSeed2> OrderNumberSeeds2 { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new OrderNumberSeedMap());
+            modelBuilder.Configurations.Add(new OrderNumberSeed2Map());
         }
     }
 

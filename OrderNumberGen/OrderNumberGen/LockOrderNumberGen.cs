@@ -9,6 +9,7 @@ namespace OrderNumberGen
 {
     class LockOrderNumberGen
     {
+        //生成随机数组
         //public static int[] randomPermutation(int min, int max)
         //{
         //    Random r = new Random();
@@ -17,9 +18,9 @@ namespace OrderNumberGen
         //    return perm.Values.ToArray();
         //}
 
-        static DateTime _LastTime;
-        static int index = 0;
-        static object _lock = new object();
+        private static DateTime _LastTime;
+        private static int index = 0;
+        private static object _lock = new object();
 
         public static string GenOrderNumber(int custID)
         {
@@ -33,10 +34,17 @@ namespace OrderNumberGen
                 }
                 else
                 {
-                    index++;
+                    if (_LastTime.Year == now.Year && _LastTime.Month == now.Month && _LastTime.Day == now.Day)
+                    {
+                        index++;
+                    }
+                    else
+                    {
+                        index = 1;
+                    }
                 }
                 
-                return string.Format("{0:yyyyMMddHHmmss} - {1:00000} - {2:0000}"
+                return string.Format("{0:yyyyMMddHHmmss}{1:00000}{2:0000}"
                     , now
                     , index
                     , custID);
