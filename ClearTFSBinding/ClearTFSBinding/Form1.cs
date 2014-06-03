@@ -15,7 +15,7 @@ namespace ClearTFSBinding
     {
         public Form1()
         {
-            InitializeComponent(); //
+            InitializeComponent(); //dddd
         }
 
         private void button1_Click(object sender, EventArgs e)
