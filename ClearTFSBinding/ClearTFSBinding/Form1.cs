@@ -36,7 +36,10 @@ namespace ClearTFSBinding
                 foreach (string fpath in tfsFiles)
                 {
                     RemoveReadonlyAtt(fpath);
-                    File.Delete(fpath);
+                    if (File.Exists(fpath))
+                    {
+                        File.Delete(fpath);
+                    }
                     txtlog.AppendText(string.Format("delete {0}\r\n", fpath));
                 }
             }
@@ -107,6 +110,11 @@ namespace ClearTFSBinding
 
         private void ClearSLN(string filePath)
         {
+            if (!File.Exists(filePath))
+            {
+                return;
+            }
+
             string tempPath = Path.GetTempFileName();
             using (var reader = new StreamReader(filePath))
             {
@@ -148,6 +156,11 @@ namespace ClearTFSBinding
 
         private void ClearProj(string filePath)
         {
+            if (!File.Exists(filePath))
+            {
+                return;
+            }
+
             string tempPath = Path.GetTempFileName();
             using (var reader = new StreamReader(filePath))
             {
