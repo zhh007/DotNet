@@ -1,0 +1,8 @@
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\Pluggable\bin\Debug\Pluggable.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\Pluggable\bin\Debug\Pluggable.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\Pluggable\obj\Debug\Pluggable.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\Pluggable\obj\Debug\Pluggable.pdb
+D:\zhhcode\DotNet\PluginDemo\Pluggable\bin\Debug\Pluggable.dll
+D:\zhhcode\DotNet\PluginDemo\Pluggable\bin\Debug\Pluggable.pdb
+D:\zhhcode\DotNet\PluginDemo\Pluggable\obj\Debug\Pluggable.dll
+D:\zhhcode\DotNet\PluginDemo\Pluggable\obj\Debug\Pluggable.pdb

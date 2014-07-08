@@ -1,0 +1,14 @@
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginManage\bin\Debug\PluginManage.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginManage\bin\Debug\PluginManage.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginManage\obj\Debug\PluginManage.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginManage\obj\Debug\PluginManage.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginManage\obj\Debug\PluginManage.csprojResolveAssemblyReference.cache
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginManage\bin\Debug\Pluggable.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginManage\bin\Debug\Pluggable.pdb
+D:\zhhcode\DotNet\PluginDemo\PluginManage\bin\Debug\PluginManage.dll
+D:\zhhcode\DotNet\PluginDemo\PluginManage\bin\Debug\PluginManage.pdb
+D:\zhhcode\DotNet\PluginDemo\PluginManage\bin\Debug\Pluggable.dll
+D:\zhhcode\DotNet\PluginDemo\PluginManage\bin\Debug\Pluggable.pdb
+D:\zhhcode\DotNet\PluginDemo\PluginManage\obj\Debug\PluginManage.csprojResolveAssemblyReference.cache
+D:\zhhcode\DotNet\PluginDemo\PluginManage\obj\Debug\PluginManage.dll
+D:\zhhcode\DotNet\PluginDemo\PluginManage\obj\Debug\PluginManage.pdb

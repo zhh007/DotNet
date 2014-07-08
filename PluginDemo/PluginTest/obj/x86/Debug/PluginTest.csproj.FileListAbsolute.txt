@@ -1,0 +1,22 @@
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\bin\Debug\AssemblyLoadTest.exe
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\bin\Debug\AssemblyLoadTest.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\bin\Debug\ClassLibrary.Interface.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\bin\Debug\Pluggable.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\bin\Debug\PluginManage.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\bin\Debug\ClassLibrary.Interface.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\bin\Debug\Pluggable.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\bin\Debug\PluginManage.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\obj\x86\Debug\PluginTest.csprojResolveAssemblyReference.cache
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\obj\x86\Debug\AssemblyLoadTest.exe
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\PluginTest\obj\x86\Debug\AssemblyLoadTest.pdb
+D:\zhhcode\DotNet\PluginDemo\PluginTest\obj\x86\Debug\AssemblyLoadTest.exe
+D:\zhhcode\DotNet\PluginDemo\PluginTest\obj\x86\Debug\AssemblyLoadTest.pdb
+D:\zhhcode\DotNet\PluginDemo\PluginTest\bin\Debug\AssemblyLoadTest.exe
+D:\zhhcode\DotNet\PluginDemo\PluginTest\bin\Debug\AssemblyLoadTest.pdb
+D:\zhhcode\DotNet\PluginDemo\PluginTest\bin\Debug\ClassLibrary.Interface.dll
+D:\zhhcode\DotNet\PluginDemo\PluginTest\bin\Debug\Pluggable.dll
+D:\zhhcode\DotNet\PluginDemo\PluginTest\bin\Debug\PluginManage.dll
+D:\zhhcode\DotNet\PluginDemo\PluginTest\bin\Debug\ClassLibrary.Interface.pdb
+D:\zhhcode\DotNet\PluginDemo\PluginTest\bin\Debug\Pluggable.pdb
+D:\zhhcode\DotNet\PluginDemo\PluginTest\bin\Debug\PluginManage.pdb
+D:\zhhcode\DotNet\PluginDemo\PluginTest\obj\x86\Debug\PluginTest.csprojResolveAssemblyReference.cache

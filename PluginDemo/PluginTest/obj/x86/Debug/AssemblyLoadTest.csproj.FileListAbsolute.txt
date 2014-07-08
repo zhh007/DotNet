@@ -1,0 +1,11 @@
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\bin\Debug\AssemblyLoadTest.exe
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\bin\Debug\AssemblyLoadTest.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\obj\x86\Debug\AssemblyLoadTest.exe
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\obj\x86\Debug\AssemblyLoadTest.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\bin\Debug\ClassLibrary.Interface.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\bin\Debug\ClassLibrary.Interface.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\obj\x86\Debug\AssemblyLoadTest.csprojResolveAssemblyReference.cache
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\bin\Debug\Pluggable.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\bin\Debug\Pluggable.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\bin\Debug\PluginManage.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\AssemblyLoadTest\bin\Debug\PluginManage.pdb

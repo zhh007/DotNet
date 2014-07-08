@@ -1,0 +1,18 @@
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\ClassLibrary.Implements\bin\Debug\ClassLibrary.Implements.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\ClassLibrary.Implements\bin\Debug\ClassLibrary.Implements.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\ClassLibrary.Implements\bin\Debug\ClassLibrary.Interface.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\ClassLibrary.Implements\bin\Debug\ClassLibrary.Interface.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\ClassLibrary.Implements\obj\Debug\ClassLibrary.Implements.csprojResolveAssemblyReference.cache
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\ClassLibrary.Implements\obj\Debug\ClassLibrary.Implements.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\ClassLibrary.Implements\obj\Debug\ClassLibrary.Implements.pdb
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\ClassLibrary.Implements\bin\Debug\Pluggable.dll
+C:\Users\USER\Documents\Visual Studio 2010\Projects\AssemblyLoadTest\ClassLibrary.Implements\bin\Debug\Pluggable.pdb
+D:\zhhcode\DotNet\PluginDemo\ClassLibrary.Implements\bin\Debug\ClassLibrary.Implements.dll
+D:\zhhcode\DotNet\PluginDemo\ClassLibrary.Implements\bin\Debug\ClassLibrary.Implements.pdb
+D:\zhhcode\DotNet\PluginDemo\ClassLibrary.Implements\bin\Debug\ClassLibrary.Interface.dll
+D:\zhhcode\DotNet\PluginDemo\ClassLibrary.Implements\bin\Debug\Pluggable.dll
+D:\zhhcode\DotNet\PluginDemo\ClassLibrary.Implements\bin\Debug\ClassLibrary.Interface.pdb
+D:\zhhcode\DotNet\PluginDemo\ClassLibrary.Implements\bin\Debug\Pluggable.pdb
+D:\zhhcode\DotNet\PluginDemo\ClassLibrary.Implements\obj\Debug\ClassLibrary.Implements.csprojResolveAssemblyReference.cache
+D:\zhhcode\DotNet\PluginDemo\ClassLibrary.Implements\obj\Debug\ClassLibrary.Implements.dll
+D:\zhhcode\DotNet\PluginDemo\ClassLibrary.Implements\obj\Debug\ClassLibrary.Implements.pdb
