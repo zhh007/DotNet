@@ -12,21 +12,16 @@ namespace Demo.Infrastructure.Data
     {
         private DbContext dataContext;
         private readonly IDbSet<T> DbSet;
-        public RepositoryBase(IDatabaseFactory databaseFactory)
+        private IUnitOfWork unitOfWork;
+        public RepositoryBase(IUnitOfWork _unitOfWork)
         {
-            DatabaseFactory = databaseFactory;
+            unitOfWork = _unitOfWork;
             DbSet = DataContext.Set<T>();
-        }
-
-        protected IDatabaseFactory DatabaseFactory
-        {
-            get;
-            private set;
         }
 
         protected DbContext DataContext
         {
-            get { return dataContext ?? (dataContext = DatabaseFactory.Get()); }
+            get { return unitOfWork.GetContext(); }
         }
 
         public virtual void Add(T entity)

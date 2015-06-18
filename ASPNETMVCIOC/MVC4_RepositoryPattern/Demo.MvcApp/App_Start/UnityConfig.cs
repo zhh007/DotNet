@@ -36,9 +36,8 @@ namespace Demo.MvcApp.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-            container.RegisterType<Infrastructure.Data.IDatabaseFactory, Data.DatabaseFactory>(new PerRequestLifetimeManager());
-            container.RegisterType<Infrastructure.Data.IUnitOfWork, Infrastructure.Data.UnitOfWork>();
-            container.RegisterType<Data.Repositories.IUserInfoRepository, Demo.Data.Repositories.UserInfoRepository>();
+            container.RegisterType<Infrastructure.Data.IUnitOfWork, Data.DemoUnitOfWork>(new PerRequestLifetimeManager());
+            container.RegisterType<Data.Repositories.IUserInfoRepository, Data.Repositories.UserInfoRepository>();
             container.RegisterType<ServiceInterface.IUserInfoService, EFAdapter.UserInfoService>();
         }
     }
