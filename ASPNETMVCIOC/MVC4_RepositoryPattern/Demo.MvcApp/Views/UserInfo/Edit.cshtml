@@ -1,0 +1,84 @@
+﻿@model Demo.MvcApp.Models.UserInfoViewModel
+@{
+    ViewBag.Title = "编辑";
+}
+@using (Html.BeginForm("Edit", "UserInfo", FormMethod.Post, new { @id = "form1" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(p => p.ID)
+    <div class="layout">
+        <div class="controls">
+            <label class="label">机构名称</label>
+            @Html.TextBoxFor(p => p.OrgName, new { @style = "width:280px;", @readonly = "readonly" })
+            <div class="help-inline">
+            </div>
+        </div>
+        <div class="controls">
+            <label class="label">机构简称</label>
+            @Html.TextBoxFor(p => p.OrgShortName, new { @style = "width:280px;", @readonly = "readonly" })
+            <div class="help-inline">
+            </div>
+        </div>
+        <div class="controls">
+            <label class="label">申请人</label>
+            @Html.TextBoxFor(p => p.CreateUser.Name, new { @style = "width:280px;", @readonly = "readonly" })
+            <div class="help-inline">
+            </div>
+        </div>
+        <div class="controls">
+            <label class="label">申请时间</label>
+            <input name="CreateTime" id="CreateTime" type="text" style="width:280px;" readonly="readonly" value="@Model.CreateTime.ToString("yyyy-MM-dd")" />
+            <div class="help-inline">
+            </div>
+        </div>
+        <div class="controls">
+            <label class="label">备注</label>
+                @Html.TextAreaFor(p => p.Remark, new { rows = "10", cols = "80", @style = "width:500px" })
+            <div class="help-inline">
+                @Html.ValidationMessageFor(p => p.Remark)
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="layout-button">
+        <ul>
+            <li>
+                <input type="submit" value="保存" class="button yellow" /></li>
+            <li>
+                <input type="button" value="取消" class="button bugrey" onclick="location='@Href("~/UserInfo/")'" /></li>
+        </ul>
+    </div>
+}
+<script type="text/javascript">
+    $(function () {
+        $("#form1").submit(function (evt) {
+            var frmObj = $(this);
+            $.validator.unobtrusive.parse(frmObj);
+            var fvalid = check() && frmObj.valid();
+
+            if (fvalid) {
+                $.post('@Href("~/UserInfo/Edit")'
+                    , frmObj.serialize()
+                    , function (data) {
+                        showMsg(data);
+                        if (data.success) {
+                            location = '@Href("~/UserInfo/")';
+                        }
+                    }
+                    , "json"
+                );
+            }
+
+            evt.preventDefault();
+        });
+
+    });
+
+    function check() {
+        var success = true;
+
+        return success;
+    }
+
+</script>
