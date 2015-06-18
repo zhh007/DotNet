@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\IRepository.cs" />
-    <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\RepositoryBase.cs" />
     <Compile Include="Mvc\ControllerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

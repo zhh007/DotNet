@@ -12,16 +12,16 @@ namespace Demo.Infrastructure.Data
     {
         private DbContext dataContext;
         private readonly IDbSet<T> DbSet;
-        private IUnitOfWork unitOfWork;
-        public RepositoryBase(IUnitOfWork _unitOfWork)
+
+        public RepositoryBase(DbContext _dbContext)
         {
-            unitOfWork = _unitOfWork;
+            dataContext = _dbContext;
             DbSet = DataContext.Set<T>();
         }
 
         protected DbContext DataContext
         {
-            get { return unitOfWork.GetContext(); }
+            get { return dataContext; }
         }
 
         public virtual void Add(T entity)

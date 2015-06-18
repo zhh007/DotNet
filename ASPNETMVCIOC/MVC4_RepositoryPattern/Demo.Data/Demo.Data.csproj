@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DemoUnitOfWork.cs" />
     <Compile Include="Models\DemoContext.cs" />
     <Compile Include="Models\Mapping\UserInfoMap.cs" />
     <Compile Include="Models\UserInfo.cs" />

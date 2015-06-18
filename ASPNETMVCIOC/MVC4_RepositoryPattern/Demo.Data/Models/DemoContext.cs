@@ -27,5 +27,10 @@ namespace Demo.Data.Models
             modelBuilder.Configurations.Add(new UserInfoMap());
             
         }
+
+        public void Commit()
+        {
+            this.SaveChanges();
+        }
     }
 }

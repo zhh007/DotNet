@@ -10,16 +10,16 @@ using Demo.Infrastructure.Validate;
 using Demo.Data.Repositories;
 using AutoMapper;
 
-namespace Demo.EFAdapter
+namespace Demo.Service
 {
     public class UserInfoService : IUserInfoService
     {
-		private IUnitOfWork fUnitofWork;
+		private DemoContext fDbContext;
         private IUserInfoRepository fUserInfoRepository;
 
-        public UserInfoService(IUnitOfWork _unitofWork, IUserInfoRepository _userInfoRepository)
+        public UserInfoService(DemoContext _dbContext, IUserInfoRepository _userInfoRepository)
         {
-            fUnitofWork = _unitofWork;
+            fDbContext = _dbContext;
             fUserInfoRepository = _userInfoRepository;
         }
 
@@ -47,7 +47,7 @@ namespace Demo.EFAdapter
         {
             var model = Mapper.Map<UserInfoDTO, UserInfo>(dto);
             fUserInfoRepository.Add(model);
-            fUnitofWork.Commit();
+            fDbContext.Commit();
         }
 
 		//[LogException]
@@ -57,15 +57,15 @@ namespace Demo.EFAdapter
 			model.Name = dto.Name;
 			model.Title = dto.Title;
 			model.Remark = dto.Remark;
-            
-            fUnitofWork.Commit();
+
+            fDbContext.Commit();
         }
 
 		//[LogException]
         public void Delete(int ID)
         {
             fUserInfoRepository.Delete(p => p.ID == ID);
-            fUnitofWork.Commit();
+            fDbContext.Commit();
         }
 
 		//[LogException]
