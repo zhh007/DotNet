@@ -1,0 +1,45 @@
+Conditionally resolve named implementation in Unity
+//http://www.pressinganswer.com/438502/conditionally-resolve-named-implementation-in-unity
+
+var container = new UnityContainer();
+
+// register
+container.Register<IFish, OneFish>("One");
+container.Register<IFish, TwoFish>("Two");
+
+// resolve
+var twoFish = container.Resolve("Two");
+
+class Tank : ITank
+{
+   public Tank(IFish fish) {...}
+}
+
+var fish = container.Resolve<IFish>("One");
+//one fish
+var tank = container.Resolve<Tank>(new DependencyOverride(typeof(IFish), fish);
+
+
+
+
+public static void RegisterTypes(IUnityContainer container)
+{
+container.RegisterType( ¡°NorthwindContext¡±, new PerRequestLifetimeManager());
+container.RegisterType(¡°NorthwindCustomerContext¡±, new PerRequestLifetimeManager() );
+
+container.RegisterType(
+    "NorthwindUnitOfWork", new InjectionConstructor(new ResolvedParameter("NorthwindContext")));
+
+container.RegisterType(
+    "NorthwindCustomerUnitOfWork", new InjectionConstructor(new ResolvedParameter("NorthwindCustomerContext")));
+}
+
+public class CustomerService : ICustomerService
+{
+private readonly IRepository _customerRepository;
+
+    public CustomerService([Dependency("NorthwindUnitOfWork")] IUnitOfWork unitofwork, IRepository customerRepository)
+    {
+        _customerRepository = customerRepository;
+    }
+}

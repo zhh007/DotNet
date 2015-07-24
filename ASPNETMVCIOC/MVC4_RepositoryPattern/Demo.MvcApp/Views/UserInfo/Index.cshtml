@@ -1,0 +1,107 @@
+﻿@model Demo.MvcApp.Models.UserInfoListViewModel
+@using Demo.Infrastructure.Mvc
+@{
+    ViewBag.Title = "";
+}
+
+<div>
+    @using (Html.BeginForm("Index", "UserInfo", new { id = 1 }, FormMethod.Get, new { id = "searchForm" }))
+    {
+        <div class="toolbar">
+            <div style="float:left">
+                <ul>
+                    <li class="search-title">关键字</li>
+                    <li class="search-input">
+                        <input name="searchText" value="@Model.Text" type="text" style="width: 250px; height:26px;" maxlength="20" />
+                    </li>
+                    <li>
+                        <input type="submit" value="查询" class="button yellow fn-left" />
+                    </li>
+                </ul>
+            </div>
+            <div class="search">
+                <input type="button" value="新增" class="button bured" onclick="location='@Href("~/UserInfo/Add")';" />
+            </div>
+        </div>
+    }
+    <div class="clear">
+    </div>
+    <div class="list">
+        <table width="100%" class="table table-hover clear">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Remark
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+            @foreach (var p in Model.List)
+            {
+                <tr>
+                    <td>
+                        @p.ID
+                    </td>
+                    <td>
+                        @p.Name
+                    </td>
+                    <td>
+                        @p.Title
+                    </td>
+                    <td>
+                        @p.Remark
+                    </td>
+                    <td>
+                        @Html.ActionLink("修改", "Edit", new { id = p.ID }, new { @class = "blue" })
+                        @*<a href="javascript:void(0);" url="~/UserInfo/Delete/@p.ID" class="blue deleteflag">
+                            删除</a>*@
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    @*<div class="pages">
+        <ul>
+            @Html.Pager(Model.List, new PagerOptions
+           {
+               PageIndexParameterName = "id",
+               ShowFirstLast = true,
+               ContainerTagIsEmpty = true,
+               ShowPagerInfo = true,
+               CurrentPagerItemWrapperFormatString = "<li><span class='current'>{0}</span></li>",
+               PagerItemWrapperFormatString = "<li><span>{0}</span></li>",
+               SeparatorHtml = "",
+               ShowPageIndexBox = true,
+               PageIndexBoxWrapperFormatString = "跳转至{0}页",
+               GoToPageSectionWrapperFormatString = "{0}"
+           })
+        </ul>
+    </div>*@
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".deleteflag").live("click", function () {
+            var url = $(this).attr("url");
+            $.fn.confirm({ message: "确定要删除吗？", callback: function () {
+                $.post(url, null, function (data, status) {
+                    if (data.result) {
+                        $.fn.notify({ message: "删除成功", callback: function () { window.location.reload(); } });
+                    }
+                    else {
+                        $.fn.notify({ message: "删除失败", title: data.message });
+                    }
+                }, "json");
+            }
+            });
+        });
+    });
+</script>
