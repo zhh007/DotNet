@@ -38,8 +38,8 @@ namespace Fang
             using (FangContext db = new FangContext())
             {
                 urls = (from p in db.PageUrls
-                            where p.HasGet == false
-                            select p.Url).ToArray();
+                        where p.HasGet == false
+                        select p.Url).ToArray();
             }
 
             List<string> filenameList = new List<string>();
@@ -52,10 +52,10 @@ namespace Fang
             WebBrowserUtil wbu = new WebBrowserUtil();
             wbu.DownloadPage(dir, urls, filenameList.ToArray());
         }
-        
+
         static void ProcessList()
         {
-            string startUrl = "http://www.19lou.com/thread/category/structure/search/result?m=10001&fid=1637&mf_1831_1=3&mf_1831_2=0&mf_55=2&mf_55_field=18&mf_68=0&mf_62=0";
+            string startUrl = "http://www." + string.Join("", new string[] { "1", "9", "lou" }) + ".com/thread/category/structure/search/result?m=10001&fid=1637&mf_1831_1=3&mf_1831_2=0&mf_55=2&mf_55_field=18&mf_68=0&mf_62=0";
             string requestEncoding = "gbk";
             string responseEncoding = "gbk";
             HttpUtil http = new HttpUtil(requestEncoding, responseEncoding);
