@@ -74,6 +74,7 @@ namespace dotnet.NetExt
             string dir = args[0] as string;
             string[] urls = args[1] as string[];
             string[] filenames = args[2] as string[];
+            Random rnd = new Random();
 
             using (var wb = new WebBrowser())
             {
@@ -116,7 +117,7 @@ namespace dotnet.NetExt
                     string txt = getReader.ReadToEnd();
                     
                     File.WriteAllText(fpath, txt, Encoding.GetEncoding("gbk"));
-                    Thread.Sleep(1000);
+                    Thread.Sleep(rnd.Next(10, 50) * 100);
                 }
             }
 

@@ -16,9 +16,9 @@ namespace Fang
     {
         static void Main(string[] args)
         {
-            //ProcessList();
+            ProcessList();
 
-            //GetDetailPageList();
+            GetDetailPageList();
 
             DetailPageProcesser.Run();
 
@@ -65,10 +65,11 @@ namespace Fang
                 Directory.CreateDirectory("ListPage");
             }
 
+            Random rnd = new Random();
             int index = 1;
             while (index <= 50)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(rnd.Next(10, 50) * 100);
                 string url = startUrl;
                 if (index > 1)
                 {
