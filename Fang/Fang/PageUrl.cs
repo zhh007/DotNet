@@ -25,5 +25,10 @@ namespace Fang
         /// 该帖被屏蔽
         /// </summary>
         public bool IsBlock { get; set; }
+        /// <summary>
+        /// 作者
+        /// </summary>
+        [MaxLength(50)]
+        public string Author { get; set; }
     }
 }

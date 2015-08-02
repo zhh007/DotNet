@@ -22,8 +22,10 @@ namespace Fang
 
             DetailPageProcesser.Run();
 
-            Console.WriteLine("Press Enter to exit.");
-            Console.ReadLine();
+            DetailPageProcesser.BuildHtmlFile();
+
+            //Console.WriteLine("Press Enter to exit.");
+            //Console.ReadLine();
         }
 
         static void GetDetailPageList()

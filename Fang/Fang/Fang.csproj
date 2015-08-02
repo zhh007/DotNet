@@ -85,6 +85,14 @@
     <Compile Include="Migrations\201507290303515_addisblock.Designer.cs">
       <DependentUpon>201507290303515_addisblock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508010308532_addauthor.cs" />
+    <Compile Include="Migrations\201508010308532_addauthor.Designer.cs">
+      <DependentUpon>201508010308532_addauthor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508010313482_modifyauthor.cs" />
+    <Compile Include="Migrations\201508010313482_modifyauthor.Designer.cs">
+      <DependentUpon>201508010313482_modifyauthor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PageUrl.cs" />
     <Compile Include="Program.cs" />
@@ -112,6 +120,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507290303515_addisblock.resx">
       <DependentUpon>201507290303515_addisblock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508010308532_addauthor.resx">
+      <DependentUpon>201508010308532_addauthor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508010313482_modifyauthor.resx">
+      <DependentUpon>201508010313482_modifyauthor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
