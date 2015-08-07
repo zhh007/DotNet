@@ -25,6 +25,10 @@ namespace Fang
                             where p.HasGet == false
                             select p).ToList();
 
+                //var list = (from p in db.PageUrls
+                //            where p.ID == 2918
+                //            select p).ToList();
+
                 int i = 1;
                 int len = list.Count;
                 foreach (var item in list)
@@ -97,6 +101,7 @@ namespace Fang
             {
                 var list = (from p in db.PageUrls
                             where p.IsPersonPost == true && p.UpdateTime > dt
+                            orderby p.UpdateTime descending
                             select p).ToList();
 
                 int i = 1;

@@ -18,10 +18,9 @@ namespace dotnet.NetExt
             string[] arr = url.Split(new char[] { '/' });
             filename = arr[arr.Length - 1];
 
-            Thread tread = new Thread(new ParameterizedThreadStart(BeginCatch));
-            tread.SetApartmentState(ApartmentState.STA);
-            tread.Start(url);
-            
+            Thread thread = new Thread(new ParameterizedThreadStart(BeginCatch));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start(url);
         }
 
         void web_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -42,7 +41,7 @@ namespace dotnet.NetExt
 
             Application.ExitThread();
         }
-        
+
         private void BeginCatch(object obj)
         {
             string url = obj.ToString();
@@ -76,17 +75,17 @@ namespace dotnet.NetExt
             string[] filenames = args[2] as string[];
             Random rnd = new Random();
 
-            using (var wb = new WebBrowser())
+            int len = urls.Length;
+            for (int i = 0; i < urls.Length; i++)
             {
-                wb.ScriptErrorsSuppressed = true;
-
-                TaskCompletionSource<bool> tcs = null;
-                WebBrowserDocumentCompletedEventHandler documentCompletedHandler = (s, e) =>
-                    tcs.TrySetResult(true);
-                
-                int len = urls.Length;
-                for (int i = 0; i < urls.Length; i++)
+                using (var wb = new WebBrowser())
                 {
+                    wb.ScriptErrorsSuppressed = true;
+
+                    TaskCompletionSource<bool> tcs = null;
+                    WebBrowserDocumentCompletedEventHandler documentCompletedHandler = (s, e) =>
+                        tcs.TrySetResult(true);
+
                     string url = urls[i];
                     string filename = filenames[i];
                     string fpath = System.IO.Path.Combine(dir, filename);
@@ -106,17 +105,17 @@ namespace dotnet.NetExt
                         wb.Navigate(urls[i]);
                         // await for DocumentCompleted
                         await tcs.Task;
+
+                        // the DOM is ready
+                        System.IO.StreamReader getReader = new System.IO.StreamReader(wb.DocumentStream, System.Text.Encoding.GetEncoding("gbk"));
+                        string txt = getReader.ReadToEnd();
+                        File.WriteAllText(fpath, txt, Encoding.GetEncoding("gbk"));
                     }
                     finally
                     {
                         wb.DocumentCompleted -= documentCompletedHandler;
                     }
-                    // the DOM is ready
-                    
-                    System.IO.StreamReader getReader = new System.IO.StreamReader(wb.DocumentStream, System.Text.Encoding.GetEncoding("gbk"));
-                    string txt = getReader.ReadToEnd();
-                    
-                    File.WriteAllText(fpath, txt, Encoding.GetEncoding("gbk"));
+
                     Thread.Sleep(rnd.Next(10, 50) * 100);
                 }
             }

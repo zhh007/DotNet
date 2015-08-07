@@ -14,6 +14,8 @@ namespace Fang
 {
     class Program
     {
+        static int PageCount = 30;
+
         static void Main(string[] args)
         {
             ProcessList();
@@ -45,13 +47,14 @@ namespace Fang
             }
 
             List<string> filenameList = new List<string>();
+            WebBrowserUtil wbu = new WebBrowserUtil();
             foreach (var item in urls)
             {
+                //wbu.Get(item);
                 string[] arr = item.ToString().Split(new char[] { '/' });
                 filenameList.Add(arr[arr.Length - 1]);
             }
-
-            WebBrowserUtil wbu = new WebBrowserUtil();
+            
             wbu.DownloadPage(dir, urls, filenameList.ToArray());
         }
 
@@ -69,7 +72,7 @@ namespace Fang
 
             Random rnd = new Random();
             int index = 1;
-            while (index <= 50)
+            while (index <= PageCount)
             {
                 Thread.Sleep(rnd.Next(10, 50) * 100);
                 string url = startUrl;
@@ -88,7 +91,7 @@ namespace Fang
             }
 
             int len = 1;
-            while (len <= 50)
+            while (len <= PageCount)
             {
                 string fpath = System.IO.Path.Combine(Environment.CurrentDirectory, "ListPage");
                 fpath = System.IO.Path.Combine(fpath, len.ToString() + ".html");
