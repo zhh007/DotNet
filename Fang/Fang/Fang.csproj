@@ -59,7 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetailPageProcesser.cs" />
+    <Compile Include="I9FanHandler.cs" />
     <Compile Include="FangContext.cs" />
     <Compile Include="Migrations\201507271135175_createdb.cs" />
     <Compile Include="Migrations\201507271135175_createdb.Designer.cs">

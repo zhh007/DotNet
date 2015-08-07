@@ -11,46 +11,53 @@ namespace dotnet.NetExt
 {
     public class WebBrowserUtil
     {
-        private string filename = "";
+        private string requestEncoding = "utf-8";
+        private string responseEncoding = "utf-8";
 
-        public void Get(string url)
+        public WebBrowserUtil(string reqEncoding, string respEncoding)
         {
-            string[] arr = url.Split(new char[] { '/' });
-            filename = arr[arr.Length - 1];
-
-            Thread thread = new Thread(new ParameterizedThreadStart(BeginCatch));
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start(url);
+            requestEncoding = reqEncoding;
+            responseEncoding = respEncoding;
         }
 
-        void web_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
+        //public void Get(string url)
+        //{
+        //    string[] arr = url.Split(new char[] { '/' });
+        //    filename = arr[arr.Length - 1];
 
-            WebBrowser web = (WebBrowser)sender;
+        //    Thread thread = new Thread(new ParameterizedThreadStart(BeginCatch));
+        //    thread.SetApartmentState(ApartmentState.STA);
+        //    thread.Start(url);
+        //}
 
-            if (web.ReadyState != WebBrowserReadyState.Complete)
-                return;
+        //void web_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        //{
 
-            System.IO.StreamReader getReader = new System.IO.StreamReader(web.DocumentStream, System.Text.Encoding.GetEncoding("gbk"));
-            string txt = getReader.ReadToEnd();
+        //    WebBrowser web = (WebBrowser)sender;
 
-            //string txt = web.DocumentText;
-            string fpath = System.IO.Path.Combine(Environment.CurrentDirectory, "DetailPage");
-            fpath = System.IO.Path.Combine(fpath, filename);
-            File.WriteAllText(fpath, txt, Encoding.GetEncoding("gbk"));
+        //    if (web.ReadyState != WebBrowserReadyState.Complete)
+        //        return;
 
-            Application.ExitThread();
-        }
+        //    System.IO.StreamReader getReader = new System.IO.StreamReader(web.DocumentStream, System.Text.Encoding.GetEncoding("gbk"));
+        //    string txt = getReader.ReadToEnd();
 
-        private void BeginCatch(object obj)
-        {
-            string url = obj.ToString();
-            WebBrowser wb = new WebBrowser();
+        //    //string txt = web.DocumentText;
+        //    string fpath = System.IO.Path.Combine(Environment.CurrentDirectory, "DetailPage");
+        //    fpath = System.IO.Path.Combine(fpath, filename);
+        //    File.WriteAllText(fpath, txt, Encoding.GetEncoding("gbk"));
 
-            wb.Navigate(url);
-            wb.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(web_DocumentCompleted);
-            Application.Run();
-        }
+        //    Application.ExitThread();
+        //}
+
+        //private void BeginCatch(object obj)
+        //{
+        //    string url = obj.ToString();
+        //    WebBrowser wb = new WebBrowser();
+
+        //    wb.Navigate(url);
+        //    wb.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(web_DocumentCompleted);
+        //    Application.Run();
+        //}
 
         public void DownloadPage(string dir, string[] urls, string[] filenames)
         {
@@ -75,17 +82,23 @@ namespace dotnet.NetExt
             string[] filenames = args[2] as string[];
             Random rnd = new Random();
 
-            int len = urls.Length;
-            for (int i = 0; i < urls.Length; i++)
+            using (var wb = new WebBrowser())
             {
-                using (var wb = new WebBrowser())
+                wb.ScriptErrorsSuppressed = true;
+
+                TaskCompletionSource<bool> tcs = null;
+                WebBrowserDocumentCompletedEventHandler documentCompletedHandler = (s, e) =>
                 {
-                    wb.ScriptErrorsSuppressed = true;
+                    WebBrowser web = (WebBrowser)s;
+                    if (web.ReadyState != WebBrowserReadyState.Complete)
+                        return;
+                    tcs.TrySetResult(true);
+                };
 
-                    TaskCompletionSource<bool> tcs = null;
-                    WebBrowserDocumentCompletedEventHandler documentCompletedHandler = (s, e) =>
-                        tcs.TrySetResult(true);
-
+                int len = urls.Length;
+                for (int i = 0; i < urls.Length; i++)
+                {
+                    Thread.Sleep(rnd.Next(0, 30) * 10);//0~300
                     string url = urls[i];
                     string filename = filenames[i];
                     string fpath = System.IO.Path.Combine(dir, filename);
@@ -102,21 +115,29 @@ namespace dotnet.NetExt
                     wb.DocumentCompleted += documentCompletedHandler;
                     try
                     {
-                        wb.Navigate(urls[i]);
+                        wb.Navigate(url);
                         // await for DocumentCompleted
                         await tcs.Task;
-
-                        // the DOM is ready
-                        System.IO.StreamReader getReader = new System.IO.StreamReader(wb.DocumentStream, System.Text.Encoding.GetEncoding("gbk"));
-                        string txt = getReader.ReadToEnd();
-                        File.WriteAllText(fpath, txt, Encoding.GetEncoding("gbk"));
                     }
                     finally
                     {
                         wb.DocumentCompleted -= documentCompletedHandler;
                     }
+                    
+                    // the DOM is ready
+                    using (var stream = wb.DocumentStream)
+                    {
+                        using (StreamReader getReader = new StreamReader(stream, Encoding.GetEncoding(responseEncoding)))
+                        {
+                            string txt = getReader.ReadToEnd();
+                            //File.WriteAllText(fpath, txt, Encoding.GetEncoding("gbk"));
+                            File.WriteAllText(fpath, txt);
 
-                    Thread.Sleep(rnd.Next(10, 50) * 100);
+                            //CsQuery.CQ dom = txt;//, Encoding.GetEncoding("gbk")
+                            //string title = dom["title"].Text();
+                            //Console.WriteLine(title);
+                        }
+                    }
                 }
             }
 

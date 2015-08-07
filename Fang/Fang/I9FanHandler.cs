@@ -1,33 +1,129 @@
 ﻿using CsQuery;
+using dotnet.NetExt;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Fang
 {
-    public class DetailPageProcesser
+    public class I9FanHandler
     {
+        static int PageCount = 30;
         public static string[] blockedPoster = new string[] {
             "19楼VIP大亨", "叫我暴君", "时光房子找我","星愿租房","zhaohai198213","zhengzhiwu5520",
             "我爱我家房产租赁","1144307450明","陶逃淘","zyf168","明天会更好噢耶","zhaohai198213",
-            "wangxuan819","向钱看齐12","zyf168"
+            "wangxuan819","向钱看齐12","zyf168","烨烨烨Mr"
         };
 
-        public static void Run()
+        public static void DownloadListPageAndParse()
+        {
+            string startUrl = "http://www." + string.Join("", new string[] { "1", "9", "lou" }) + ".com/thread/category/structure/search/result?m=10001&fid=1637&mf_1831_1=3&mf_1831_2=0&mf_55=2&mf_55_field=18&mf_68=0&mf_62=0";
+            string requestEncoding = "gbk";
+            string responseEncoding = "gbk";
+            HttpUtil http = new HttpUtil(requestEncoding, responseEncoding);
+
+            if (!Directory.Exists("ListPage"))
+            {
+                Directory.CreateDirectory("ListPage");
+            }
+
+            Random rnd = new Random();
+            int index = 1;
+            while (index <= PageCount)
+            {
+                Thread.Sleep(rnd.Next(0, 30) * 10);//0~300
+                string url = startUrl;
+                if (index > 1)
+                {
+                    url += "&page=" + index.ToString();
+                }
+                string txt = http.Get(url);
+                string fpath = System.IO.Path.Combine(Environment.CurrentDirectory, "ListPage");
+                fpath = System.IO.Path.Combine(fpath, index.ToString() + ".html");
+                File.WriteAllText(fpath, txt);//, Encoding.GetEncoding("gbk")
+
+                Console.WriteLine(index);
+
+                index++;
+            }
+
+            int len = 1;
+            while (len <= PageCount)
+            {
+                string fpath = System.IO.Path.Combine(Environment.CurrentDirectory, "ListPage");
+                fpath = System.IO.Path.Combine(fpath, len.ToString() + ".html");
+
+                CQ dom = File.ReadAllText(fpath);//, Encoding.GetEncoding("gbk")
+                var list = dom[".list-data > tbody"].Find("div.subject > a");
+
+                if (list != null && list.Length > 0)
+                {
+                    using (FangContext db = new FangContext())
+                    {
+                        foreach (var item in list)
+                        {
+                            PageUrl page = new PageUrl();
+                            page.Url = item.Attributes["href"];
+                            page.HasGet = false;
+                            page.IsPersonPost = false;
+                            page.Title = item.FirstChild.NodeValue.Trim();
+                            page.CreateTime = DateTime.Now;
+                            page.IsBlock = false;
+                            page.UpdateTime = null;
+
+                            if (db.PageUrls.Count(p => p.Url == page.Url) == 0)
+                            {
+                                db.PageUrls.Add(page);
+                            }
+                        }
+
+                        db.SaveChanges();
+                    }
+                }
+                Console.WriteLine(len + "," + list.Length);
+                len++;
+            }
+        }
+
+        public static void DownloadDetailPage()
+        {
+            string dir = System.IO.Path.Combine(Environment.CurrentDirectory, "DetailPage");
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            string[] urls = null;
+            using (FangContext db = new FangContext())
+            {
+                urls = (from p in db.PageUrls
+                        where p.HasGet == false
+                        select p.Url).Take(2).ToArray();
+            }
+
+            List<string> filenameList = new List<string>();
+            WebBrowserUtil wbu = new WebBrowserUtil("gbk", "gbk");
+            foreach (var item in urls)
+            {
+                string[] arr = item.ToString().Split(new char[] { '/' });
+                filenameList.Add(arr[arr.Length - 1]);
+            }
+
+            wbu.DownloadPage(dir, urls, filenameList.ToArray());
+        }
+
+        public static void ParseDetailPage()
         {
             using (FangContext db = new FangContext())
             {
                 var list = (from p in db.PageUrls
                             where p.HasGet == false
                             select p).ToList();
-
-                //var list = (from p in db.PageUrls
-                //            where p.ID == 2918
-                //            select p).ToList();
 
                 int i = 1;
                 int len = list.Count;
@@ -41,7 +137,7 @@ namespace Fang
                     if (File.Exists(fpath))
                     {
                         Console.WriteLine("{0}/{1} {2}", i, len, fpath);
-                        CQ dom = File.ReadAllText(fpath, Encoding.GetEncoding("gbk"));
+                        CQ dom = File.ReadAllText(fpath);//, Encoding.GetEncoding("gbk")
                         string title = dom["title"].Text();
                         string dt = dom[".cont-top-left meta"].Attr("content");
                         string content = dom[".view-data"].Text();
@@ -135,5 +231,15 @@ namespace Fang
             //Process.Start("iexplore.exe", logname);
             Process.Start("chrome", logname);
         }
+
+        public static void Run()
+        {
+            //DownloadListPageAndParse();
+            DownloadDetailPage();
+            //ParseDetailPage();
+            //BuildHtmlFile();
+        }
+
+
     }
 }
