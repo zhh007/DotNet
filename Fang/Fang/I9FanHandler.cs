@@ -17,7 +17,7 @@ namespace Fang
         public static string[] blockedPoster = new string[] {
             "19楼VIP大亨", "叫我暴君", "时光房子找我","星愿租房","zhaohai198213","zhengzhiwu5520",
             "我爱我家房产租赁","1144307450明","陶逃淘","zyf168","明天会更好噢耶","zhaohai198213",
-            "wangxuan819","向钱看齐12","zyf168","烨烨烨Mr"
+            "wangxuan819","向钱看齐12","zyf168","烨烨烨Mr","wlm5098590","我爱我家租房01"
         };
 
         public static void DownloadListPageAndParse()
@@ -45,7 +45,7 @@ namespace Fang
                 string txt = http.Get(url);
                 string fpath = System.IO.Path.Combine(Environment.CurrentDirectory, "ListPage");
                 fpath = System.IO.Path.Combine(fpath, index.ToString() + ".html");
-                File.WriteAllText(fpath, txt);//, Encoding.GetEncoding("gbk")
+                File.WriteAllText(fpath, txt, Encoding.UTF8);
 
                 Console.WriteLine(index);
 
@@ -103,7 +103,7 @@ namespace Fang
             {
                 urls = (from p in db.PageUrls
                         where p.HasGet == false
-                        select p.Url).Take(2).ToArray();
+                        select p.Url).ToArray();
             }
 
             List<string> filenameList = new List<string>();
@@ -181,10 +181,22 @@ namespace Fang
 
         public static void BuildHtmlFile()
         {
+            List<PageUrl> list = null;
+
+            DateTime dt = new DateTime(2015, 7, 1);
+            using (FangContext db = new FangContext())
+            {
+                list = (from p in db.PageUrls
+                            where p.IsPersonPost == true && p.UpdateTime > dt
+                            orderby p.UpdateTime descending
+                            select p).ToList();
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<html>");
             sb.AppendLine("<head>");
             sb.AppendLine("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=gb2312\" />");
+            sb.AppendFormat("<title>{0}</title>", list.Count);
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
             sb.AppendLine("<table>");
@@ -192,25 +204,16 @@ namespace Fang
             sb.AppendLine("<td>日期</td><td>发布人</td><td>链接</td>");
             sb.AppendLine("</tr>");
 
-            DateTime dt = new DateTime(2015, 7, 1);
-            using (FangContext db = new FangContext())
+            int i = 1;
+            int len = list.Count;
+            foreach (var item in list)
             {
-                var list = (from p in db.PageUrls
-                            where p.IsPersonPost == true && p.UpdateTime > dt
-                            orderby p.UpdateTime descending
-                            select p).ToList();
-
-                int i = 1;
-                int len = list.Count;
-                foreach (var item in list)
-                {
-                    sb.AppendLine("<tr>");
-                    sb.AppendFormat("<td>{0:yyyy-MM-dd}</td>", item.UpdateTime);
-                    sb.AppendFormat("<td>{0}</td>", item.Author);
-                    sb.AppendFormat("<td><a href='{0}' target='_blank'>{1}</a></td>", item.Url, item.Title);
-                    sb.AppendLine("</tr>");
-                    i++;
-                }
+                sb.AppendLine("<tr>");
+                sb.AppendFormat("<td>{0:yyyy-MM-dd HH:mm:ss}</td>", item.UpdateTime);
+                sb.AppendFormat("<td>{0}</td>", item.Author);
+                sb.AppendFormat("<td><a href='{0}' target='_blank'>{1}</a></td>", item.Url, item.Title);
+                sb.AppendLine("</tr>");
+                i++;
             }
             sb.AppendLine("</table>");
 
@@ -234,10 +237,10 @@ namespace Fang
 
         public static void Run()
         {
-            //DownloadListPageAndParse();
+            DownloadListPageAndParse();
             DownloadDetailPage();
-            //ParseDetailPage();
-            //BuildHtmlFile();
+            ParseDetailPage();
+            BuildHtmlFile();
         }
 
 

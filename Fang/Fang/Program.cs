@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Text;
 
 namespace Fang
 {
@@ -14,7 +15,7 @@ namespace Fang
             _stopWatch.Start();
             I9FanHandler.Run();
             _stopWatch.Stop();
-            Console.WriteLine("执行时间:" + (_stopWatch.Elapsed.TotalMilliseconds * 1.0 / 1000).ToString(CultureInfo.InvariantCulture) + "秒");
+            Console.WriteLine("执行时间:{0}", _stopWatch.Elapsed);
 
             //I9FanHandler.ParseDetailPage();
             //I9FanHandler.BuildHtmlFile();

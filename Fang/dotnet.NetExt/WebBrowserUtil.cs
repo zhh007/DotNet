@@ -98,7 +98,7 @@ namespace dotnet.NetExt
                 int len = urls.Length;
                 for (int i = 0; i < urls.Length; i++)
                 {
-                    Thread.Sleep(rnd.Next(0, 30) * 10);//0~300
+                    //Thread.Sleep(rnd.Next(0, 30) * 10);//0~300
                     string url = urls[i];
                     string filename = filenames[i];
                     string fpath = System.IO.Path.Combine(dir, filename);
@@ -130,12 +130,7 @@ namespace dotnet.NetExt
                         using (StreamReader getReader = new StreamReader(stream, Encoding.GetEncoding(responseEncoding)))
                         {
                             string txt = getReader.ReadToEnd();
-                            //File.WriteAllText(fpath, txt, Encoding.GetEncoding("gbk"));
-                            File.WriteAllText(fpath, txt);
-
-                            //CsQuery.CQ dom = txt;//, Encoding.GetEncoding("gbk")
-                            //string title = dom["title"].Text();
-                            //Console.WriteLine(title);
+                            File.WriteAllText(fpath, txt, Encoding.UTF8);
                         }
                     }
                 }
