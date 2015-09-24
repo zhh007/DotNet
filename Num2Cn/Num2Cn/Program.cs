@@ -10,6 +10,9 @@ namespace Num2Cn
     {
         static void Main(string[] args)
         {
+            string str = Num2Cn.ConvertData("12");
+            Console.WriteLine(str);
+            Console.ReadKey();
         }
     }
 }
