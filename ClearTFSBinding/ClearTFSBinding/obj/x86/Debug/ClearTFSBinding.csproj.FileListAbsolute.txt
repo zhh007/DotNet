@@ -1,9 +1,0 @@
-C:\Users\USER\Documents\Visual Studio 2010\Projects\ClearTFSBinding\ClearTFSBinding\bin\Debug\ClearTFSBinding.exe
-C:\Users\USER\Documents\Visual Studio 2010\Projects\ClearTFSBinding\ClearTFSBinding\bin\Debug\ClearTFSBinding.pdb
-C:\Users\USER\Documents\Visual Studio 2010\Projects\ClearTFSBinding\ClearTFSBinding\obj\x86\Debug\ClearTFSBinding.Form1.resources
-C:\Users\USER\Documents\Visual Studio 2010\Projects\ClearTFSBinding\ClearTFSBinding\obj\x86\Debug\ClearTFSBinding.Properties.Resources.resources
-C:\Users\USER\Documents\Visual Studio 2010\Projects\ClearTFSBinding\ClearTFSBinding\obj\x86\Debug\ClearTFSBinding.csproj.GenerateResource.Cache
-C:\Users\USER\Documents\Visual Studio 2010\Projects\ClearTFSBinding\ClearTFSBinding\obj\x86\Debug\ClearTFSBinding.exe
-C:\Users\USER\Documents\Visual Studio 2010\Projects\ClearTFSBinding\ClearTFSBinding\obj\x86\Debug\ClearTFSBinding.pdb
-D:\zhhcode\DotNet\ClearTFSBinding\ClearTFSBinding\obj\x86\Debug\ClearTFSBinding.exe
-D:\zhhcode\DotNet\ClearTFSBinding\ClearTFSBinding\obj\x86\Debug\ClearTFSBinding.pdb
