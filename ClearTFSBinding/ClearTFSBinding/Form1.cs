@@ -13,9 +13,16 @@ namespace ClearTFSBinding
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        string _dir = string.Empty;
+        public Form1(string dir)
         {
-            InitializeComponent(); //zhh007
+            _dir = dir;
+            InitializeComponent();
+
+            if (!string.IsNullOrEmpty(_dir))
+            {
+                textBox1.Text = _dir;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,6 +42,10 @@ namespace ClearTFSBinding
             {
                 foreach (string fpath in tfsFiles)
                 {
+                    if (!File.Exists(fpath))
+                    {
+                        continue;
+                    }
                     RemoveReadonlyAtt(fpath);
                     if (File.Exists(fpath))
                     {
@@ -48,6 +59,10 @@ namespace ClearTFSBinding
             {
                 foreach (string fpath in projFiles)
                 {
+                    if (!File.Exists(fpath))
+                    {
+                        continue;
+                    }
                     RemoveReadonlyAtt(fpath);
                     ClearProj(fpath);
                     txtlog.AppendText(string.Format("clear {0}\r\n", fpath));
@@ -58,6 +73,10 @@ namespace ClearTFSBinding
             {
                 foreach (string fpath in slnFiles)
                 {
+                    if (!File.Exists(fpath))
+                    {
+                        continue;
+                    }
                     RemoveReadonlyAtt(fpath);
                     ClearSLN(fpath);
                     txtlog.AppendText(string.Format("clear {0}\r\n", fpath));
