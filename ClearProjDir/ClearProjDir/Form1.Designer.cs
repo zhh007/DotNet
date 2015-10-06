@@ -105,7 +105,7 @@
             this.txtSetting.Location = new System.Drawing.Point(6, 20);
             this.txtSetting.Multiline = true;
             this.txtSetting.Name = "txtSetting";
-            this.txtSetting.Size = new System.Drawing.Size(248, 373);
+            this.txtSetting.Size = new System.Drawing.Size(248, 372);
             this.txtSetting.TabIndex = 0;
             // 
             // txtResult
@@ -113,7 +113,7 @@
             this.txtResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtResult.Location = new System.Drawing.Point(7, 21);
+            this.txtResult.Location = new System.Drawing.Point(6, 20);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.Size = new System.Drawing.Size(532, 372);
