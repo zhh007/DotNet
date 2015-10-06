@@ -20,6 +20,12 @@ namespace ClearProjDir
         {
             string txtInfo = "支持搜索文件夹名称，如：trace\r\n支持文件名模糊查找，如：*.log";
             lblInfo.Text = txtInfo;
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("trace");
+            sb.AppendLine("exceptionlog");
+            sb.AppendLine("UploadFiles");
+            txtSetting.Text = sb.ToString();
         }
     }
 }
