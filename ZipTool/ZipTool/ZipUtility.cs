@@ -46,7 +46,7 @@ namespace ZipTool
                     foreach (string str in xfiles)
                     {
                         //arrtr += string.Format(" -x*\\{0}\\* -x*\\{0} ", str);
-                        arrtr += string.Format(" -x.\\{0}\\* -x.\\{0} ", str);
+                        arrtr += string.Format(" -x.\\*\\{0}\\* -x.\\*\\{0} ", str);
                     }
                     cmd = cmd + arrtr;
                 }

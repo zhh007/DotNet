@@ -30,6 +30,7 @@ namespace ZipTool
             sb.AppendLine("obj");
             sb.AppendLine("trace");
             sb.AppendLine("exceptionlog");
+            sb.AppendLine("UploadFiles");
             txtExcludeDir.Text = sb.ToString();
 
             sb = new StringBuilder();
