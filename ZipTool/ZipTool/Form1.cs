@@ -19,7 +19,12 @@ namespace ZipTool
 
             if (!string.IsNullOrEmpty(dir))
             {
-                txtDir.Text = dir;
+                var root = new System.IO.DirectoryInfo(dir);
+                if (root != null)
+                {
+                    txtDir.Text = dir;
+                    txtFileName.Text = root.Name;
+                }
             }
         }
 
@@ -54,7 +59,12 @@ namespace ZipTool
             DialogResult result = dlg.ShowDialog();
             if (result == DialogResult.OK)
             {
-                txtDir.Text = dlg.SelectedPath;
+                var root = new System.IO.DirectoryInfo(dlg.SelectedPath);
+                if (root != null)
+                {
+                    txtDir.Text = dlg.SelectedPath;
+                    txtFileName.Text = root.Name;
+                }
             }
         }
 
@@ -91,13 +101,24 @@ namespace ZipTool
 
             try
             {
+                string filename = txtFileName.Text;
+                if(string.IsNullOrEmpty(filename))
+                {
+                    filename = root.Name;
+                }
+                if(chkTime.Checked)
+                {
+                    filename = string.Format("{0}{1:yyyyMMddHHmmss}.{2}", filename, DateTime.Now, (rbRAR.Checked ? "rar" : "zip"));
+                }
+                else
+                {
+                    filename = string.Format("{0}.{1}", filename, (rbRAR.Checked ? "rar" : "zip"));
+                }
                 this.Hide();
-                ZipUtility.RARXFM(txtDir.Text, txtDir.Text, string.Format("{0}{1:yyyyMMddHHmmssffffff}.rar", root.Name, DateTime.Now), exp);
+                ZipUtility.RARXFM(root.FullName, root.FullName, filename, exp);
+                this.Close();
             }
             catch (Exception)
-            {
-            }
-            finally
             {
                 this.Show();
             }

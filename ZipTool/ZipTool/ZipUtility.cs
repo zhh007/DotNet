@@ -35,7 +35,7 @@ namespace ZipTool
                 if (!System.IO.Directory.Exists(targetrarPath))
                     System.IO.Directory.CreateDirectory(targetrarPath);
                 //压缩命令，相当于在要压缩的文件夹(path)上点右键->WinRAR->添加到压缩文件->输入压缩文件名(rarName) 
-                cmd = string.Format("a {0} {1} -ep1 -o+ -r -ibck",//-inul
+                cmd = string.Format("a {0} {1} -ep1 -o+ -r",//-inul -ibck
                                     rarName,
                                     path);
                 //-x*\\bin\\* -x*\\bin -x*\\obj\\* -x*\\obj     ---排除bin,obj文件夹里所有文件，以及文件本身
