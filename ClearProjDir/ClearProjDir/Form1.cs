@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ClearProjDir
@@ -19,6 +21,10 @@ namespace ClearProjDir
             {
                 txtDir.Text = dir;
             }
+
+            _updateListViewByFile = new UpdateListViewByFileDelegate(UpdateListViewByFile);
+            _updateListViewByFolder = new UpdateListViewByFolderDelegate(UpdateListViewByFolder);
+            _showPathDelegate = new ShowPathDelegate(ShowPath);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,15 +37,6 @@ namespace ClearProjDir
             sb.AppendLine("exceptionlog");
             sb.AppendLine("UploadFiles");
             txtSetting.Text = sb.ToString();
-
-
-            //for (int i = 20; i >= 1; i--)
-            //{
-            //    ListViewItem li = new ListViewItem();
-            //    li.SubItems[0].Text = "";
-            //    li.SubItems.Add("aaa" + i.ToString());
-            //    this.lvResult.Items.Add(li);
-            //}
         }
 
         /// <summary>
@@ -94,76 +91,43 @@ namespace ClearProjDir
                 return;
             }
 
+            List<Regex> regList = new List<Regex>();
+            foreach (var item in query)
+            {
+                string regStr = string.Format(@"(\\)*" + item.Replace("*", @"[^\\]*") + @"(\\)*");
+                regList.Add(new Regex(regStr));
+            }
+
             StatusLabel.Text = "正在扫描...";
             btnSearch.Enabled = false;
             btnBrowser.Enabled = false;
             txtSetting.Enabled = false;
             txtDir.Enabled = false;
+            btnSelect.Enabled = false;
+            btnSelectOther.Enabled = false;
+            btnDelete.Enabled = false;
             try
             {
-                System.IO.DirectoryInfo root = new System.IO.DirectoryInfo(txtDir.Text);
-                foreach (var searchPattern in query)
+                Thread t = new Thread(() =>
                 {
-                    if (searchPattern.IndexOf(".") > -1)
-                    {//files
-                        SearchFiles(root, searchPattern);
-                    }
-                    else
-                    {//folder
-                        SearchFiles(root, searchPattern);
-                        SearchFolders(root, searchPattern);
-                    }
-                }
+                    ThreadMethod(txtDir.Text, regList);
+                });
+                t.Start();
             }
             catch (Exception)
             {
-
+                StatusLabel.Text = "扫描完成";
+                btnSearch.Enabled = true;
+                btnBrowser.Enabled = true;
+                txtSetting.Enabled = true;
+                txtDir.Enabled = true;
+                btnSelect.Enabled = true;
+                btnSelectOther.Enabled = true;
+                btnDelete.Enabled = true;
             }
-
-            StatusLabel.Text = "扫描完成";
-            btnSearch.Enabled = true;
-            btnBrowser.Enabled = true;
-            txtSetting.Enabled = true;
-            txtDir.Enabled = true;
         }
 
         private List<string> paths = new List<string>();
-
-        private void SearchFiles(System.IO.DirectoryInfo dir, string searchPattern)
-        {
-            var files = dir.GetFiles(searchPattern, System.IO.SearchOption.AllDirectories);
-            foreach (var file in files)
-            {
-                if (paths.Contains(file.FullName))
-                {
-                    continue;
-                }
-                paths.Add(file.FullName);
-                ListViewItem li = new ListViewItem();
-                li.Tag = file;
-                li.SubItems[0].Text = "";
-                li.SubItems.Add(file.FullName);
-                this.lvResult.Items.Add(li);
-            }
-        }
-
-        private void SearchFolders(System.IO.DirectoryInfo dir, string searchPattern)
-        {
-            var folders = dir.GetDirectories(searchPattern, System.IO.SearchOption.AllDirectories);
-            foreach (var folder in folders)
-            {
-                if (paths.Contains(folder.FullName))
-                {
-                    continue;
-                }
-                paths.Add(folder.FullName);
-                ListViewItem li = new ListViewItem();
-                li.Tag = folder;
-                li.SubItems[0].Text = "";
-                li.SubItems.Add(folder.FullName);
-                this.lvResult.Items.Add(li);
-            }
-        }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -198,6 +162,131 @@ namespace ClearProjDir
             }
 
             StatusLabel.Text = "删除完成";
+        }
+
+        private void SearchFiles(System.IO.FileInfo[] files, List<Regex> regList)
+        {
+            foreach (var file in files)
+            {
+                //方法1
+                //this.BeginInvoke(new Action(delegate () {
+                //    StatusLabel.Text = file.FullName;
+                //}));
+                //方法2
+                ShowPath(file.FullName);
+                Thread.Sleep(1);
+
+                bool fileIsMatch = false;
+                foreach (var reg in regList)
+                {
+                    if (reg.IsMatch(file.FullName))
+                    {
+                        fileIsMatch = true;
+                        break;
+                    }
+                }
+                if (fileIsMatch)
+                {
+                    if (!paths.Contains(file.FullName))
+                    {
+                        paths.Add(file.FullName);
+                        this.BeginInvoke(_updateListViewByFile, file);
+                    }
+                }
+            }
+        }
+
+        private void SearchFolder(System.IO.DirectoryInfo dir, List<Regex> regList)
+        {
+            var files = dir.GetFiles();
+            SearchFiles(files, regList);
+            var dirs = dir.GetDirectories();
+            foreach (var folder in dirs)
+            {
+                //方法1
+                //this.BeginInvoke(new Action(delegate () {
+                //    StatusLabel.Text = folder.FullName;
+                //}));
+                //方法2
+                ShowPath(folder.FullName);
+                Thread.Sleep(1);
+
+                bool folderIsMatch = false;
+                foreach (var reg in regList)
+                {
+                    if (reg.IsMatch(folder.FullName))
+                    {
+                        folderIsMatch = true;
+                        break;
+                    }
+                }
+                if (folderIsMatch)
+                {
+                    if (!paths.Contains(folder.FullName))
+                    {
+                        paths.Add(folder.FullName);
+                        this.BeginInvoke(_updateListViewByFolder, folder);
+                    }
+                    continue;
+                }
+                SearchFolder(folder, regList);
+            }
+        }
+
+        private void ThreadMethod(string dir, List<Regex> regList)
+        {
+            System.IO.DirectoryInfo root = new System.IO.DirectoryInfo(dir);
+
+            SearchFolder(root, regList);
+
+            this.BeginInvoke(new Action(() =>
+            {
+                StatusLabel.Text = "扫描完成";
+                btnSearch.Enabled = true;
+                btnBrowser.Enabled = true;
+                txtSetting.Enabled = true;
+                txtDir.Enabled = true;
+                btnSelect.Enabled = true;
+                btnSelectOther.Enabled = true;
+                btnDelete.Enabled = true;
+            }));
+        }
+
+        public delegate void UpdateListViewByFileDelegate(System.IO.FileInfo file);
+        public delegate void UpdateListViewByFolderDelegate(System.IO.DirectoryInfo folder);
+        public delegate void ShowPathDelegate(string path);
+        private UpdateListViewByFileDelegate _updateListViewByFile = null;
+        private UpdateListViewByFolderDelegate _updateListViewByFolder = null;
+        private ShowPathDelegate _showPathDelegate = null;
+        private void UpdateListViewByFile(System.IO.FileInfo file)
+        {
+            ListViewItem li = new ListViewItem();
+            li.Tag = file;
+            li.SubItems[0].Text = "";
+            li.SubItems.Add(file.FullName);
+            this.lvResult.Items.Add(li);
+        }
+        private void UpdateListViewByFolder(System.IO.DirectoryInfo folder)
+        {
+            ListViewItem li = new ListViewItem();
+            li.Tag = folder;
+            li.SubItems[0].Text = "";
+            li.SubItems.Add(folder.FullName);
+            this.lvResult.Items.Add(li);
+        }
+        private void ShowPath(string path)
+        {
+            if (this.InvokeRequired)
+            {
+                //方法1
+                this.BeginInvoke(new MethodInvoker(delegate { ShowPath(path); }));
+                //方法2
+                //this.BeginInvoke(new MethodInvoker(() => ShowPath(path)));
+            }
+            else
+            {
+                this.StatusLabel.Text = path;
+            }
         }
     }
 }
