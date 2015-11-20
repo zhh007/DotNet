@@ -20,7 +20,7 @@ namespace ConsoleApp
 
             using (DemoContext context = new DemoContext())
             {
-                IUserInfoService userinfoService = new UserInfoService(context, new UserInfoRepository(context));
+                IUserInfoService userinfoService = new UserInfoService(context);
                 UserInfoDTO dto = new UserInfoDTO();
                 dto.Name = "test8";
                 dto.Remark = "测试用户";

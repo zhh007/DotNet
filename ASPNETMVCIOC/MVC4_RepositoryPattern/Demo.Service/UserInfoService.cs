@@ -10,6 +10,7 @@ using Demo.Infrastructure.Validate;
 using Demo.Data.Repositories;
 using AutoMapper;
 using System.Data.Entity;
+using Demo.Infrastructure;
 
 namespace Demo.Service
 {
@@ -18,11 +19,13 @@ namespace Demo.Service
         private DbContext fDbContext;
         private IUserInfoRepository fUserInfoRepository;
 
-        public UserInfoService(DemoContext _dbContext, IUserInfoRepository _userInfoRepository)
+        public UserInfoService(DemoContext _dbContext
+            //, IUserInfoRepository _userInfoRepository
+            )
         {
             fDbContext = _dbContext;
-            fUserInfoRepository = _userInfoRepository;
-            //fUserInfoRepository = ServiceLocator.Instance.GetService<IFamilyMemberRepository>();
+            //fUserInfoRepository = _userInfoRepository;
+            fUserInfoRepository = ServiceLocator.Instance.GetService<IUserInfoRepository>(new { _dbContext = _dbContext });
         }
 
         //[LogException]

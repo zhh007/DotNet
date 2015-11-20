@@ -8,7 +8,7 @@ using Demo.Data.Models.Mapping;
 
 namespace Demo.Data.Models
 {
-    public partial class DemoContext : DbContext
+    public partial class DemoContext : DbContext, IDisposable
     {
         static DemoContext()
         {
