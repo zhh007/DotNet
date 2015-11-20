@@ -14,7 +14,7 @@ namespace Demo.Service
 {
     public class UserInfoService : IUserInfoService
     {
-		private DemoContext fDbContext;
+        private DemoContext fDbContext;
         private IUserInfoRepository fUserInfoRepository;
 
         public UserInfoService(DemoContext _dbContext, IUserInfoRepository _userInfoRepository)
@@ -23,13 +23,13 @@ namespace Demo.Service
             fUserInfoRepository = _userInfoRepository;
         }
 
-		//[LogException]
+        //[LogException]
         public IList<UserInfoDTO> GetPagedList(string text, int page, int pageSize, out int total)
         {
             var lst = fUserInfoRepository.GetAll();
             if (!string.IsNullOrEmpty(text))
             {
-				text = text.Trim();
+                text = text.Trim();
                 lst = lst.Where(p => p.Name.Contains(text) || p.Title.Contains(text) || p.Remark.Contains(text));
             }
 
@@ -42,7 +42,7 @@ namespace Demo.Service
             return Mapper.Map<List<UserInfo>, List<UserInfoDTO>>(lstresult);
         }
 
-		//[LogException]
+        //[LogException]
         public void Add(UserInfoDTO dto)
         {
             var model = Mapper.Map<UserInfoDTO, UserInfo>(dto);
@@ -50,25 +50,25 @@ namespace Demo.Service
             fDbContext.Commit();
         }
 
-		//[LogException]
+        //[LogException]
         public void Update(UserInfoDTO dto)
         {
-			var model = fUserInfoRepository.Get(p => p.ID == dto.ID);
-			model.Name = dto.Name;
-			model.Title = dto.Title;
-			model.Remark = dto.Remark;
+            var model = fUserInfoRepository.Get(p => p.ID == dto.ID);
+            model.Name = dto.Name;
+            model.Title = dto.Title;
+            model.Remark = dto.Remark;
 
             fDbContext.Commit();
         }
 
-		//[LogException]
+        //[LogException]
         public void Delete(int ID)
         {
             fUserInfoRepository.Delete(p => p.ID == ID);
             fDbContext.Commit();
         }
 
-		//[LogException]
+        //[LogException]
         public IEnumerable<ValidateResult> CanAdd(UserInfoDTO dto)
         {
             //int count = fUserInfoRepository.Count(p => p.Name == dto.Name);
@@ -76,10 +76,10 @@ namespace Demo.Service
             //{
             //    yield return new ValidateResult("Name", "已经存在相同数据。");
             //}
-			return null;
+            return null;
         }
 
-		//[LogException]
+        //[LogException]
         public IEnumerable<ValidateResult> CanUpdate(UserInfoDTO dto)
         {
             //int count = fUserInfoRepository.Count(p => p.Name == dto.Name && p.ID != dto.ID);
@@ -87,10 +87,10 @@ namespace Demo.Service
             //{
             //    yield return new ValidateResult("Name", "已经存在相同数据。");
             //}
-			return null;
+            return null;
         }
 
-		//[LogException]
+        //[LogException]
         public IEnumerable<ValidateResult> CanDelete(int ID)
         {
             //int count = fModuleRepsitory.Count(p => p.TypeID == ID);
@@ -101,14 +101,14 @@ namespace Demo.Service
             return null;
         }
 
-		//[LogException]
+        //[LogException]
         public UserInfoDTO GetByID(int ID)
         {
             var model = fUserInfoRepository.Get(p => p.ID == ID);
             return Mapper.Map<UserInfo, UserInfoDTO>(model);
         }
 
-		//[LogException]
+        //[LogException]
         public IList<UserInfoDTO> GetAll()
         {
             var lst = fUserInfoRepository.GetAll().ToList();
