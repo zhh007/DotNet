@@ -9,18 +9,20 @@ using Demo.Infrastructure.Data;
 using Demo.Infrastructure.Validate;
 using Demo.Data.Repositories;
 using AutoMapper;
+using System.Data.Entity;
 
 namespace Demo.Service
 {
     public class UserInfoService : IUserInfoService
     {
-        private DemoContext fDbContext;
+        private DbContext fDbContext;
         private IUserInfoRepository fUserInfoRepository;
 
-        public UserInfoService(DemoContext _dbContext, IUserInfoRepository _userInfoRepository)
+        public UserInfoService(DbContext _dbContext, IUserInfoRepository _userInfoRepository)
         {
             fDbContext = _dbContext;
             fUserInfoRepository = _userInfoRepository;
+            //fUserInfoRepository = ServiceLocator.Instance.GetService<IFamilyMemberRepository>();
         }
 
         //[LogException]
@@ -47,7 +49,7 @@ namespace Demo.Service
         {
             var model = Mapper.Map<UserInfoDTO, UserInfo>(dto);
             fUserInfoRepository.Add(model);
-            fDbContext.Commit();
+            fDbContext.SaveChanges();
         }
 
         //[LogException]
@@ -58,14 +60,14 @@ namespace Demo.Service
             model.Title = dto.Title;
             model.Remark = dto.Remark;
 
-            fDbContext.Commit();
+            fDbContext.SaveChanges();
         }
 
         //[LogException]
         public void Delete(int ID)
         {
             fUserInfoRepository.Delete(p => p.ID == ID);
-            fDbContext.Commit();
+            fDbContext.SaveChanges();
         }
 
         //[LogException]

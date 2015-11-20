@@ -65,7 +65,7 @@ namespace Demo.MvcApp.Controllers
 				}
 				return Json(new { success = false, message = "" }, "text/html");
 			}
-            catch (Exception ex)
+            catch (Exception)
             {
                 //LogHelper.Error("保存失败", ex);
                 return Json(new { result = false, message = "发生错误，请联系管理员。" });
