@@ -12,8 +12,8 @@ namespace Demo.Data.Repositories
 {
     public class UserInfoRepository : RepositoryBase<UserInfo>, IUserInfoRepository
     {
-        public UserInfoRepository(DemoContext _dbContext)
-            : base(_dbContext)
+        public UserInfoRepository(DemoContext context)
+            : base(context)
         {
 
         }

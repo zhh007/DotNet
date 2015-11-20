@@ -19,13 +19,13 @@ namespace Demo.Service
         private DbContext fDbContext;
         private IUserInfoRepository fUserInfoRepository;
 
-        public UserInfoService(DemoContext _dbContext
+        public UserInfoService(DemoContext context
             //, IUserInfoRepository _userInfoRepository
             )
         {
-            fDbContext = _dbContext;
+            fDbContext = context;
             //fUserInfoRepository = _userInfoRepository;
-            fUserInfoRepository = ServiceLocator.Instance.GetService<IUserInfoRepository>(new { _dbContext = _dbContext });
+            fUserInfoRepository = ServiceLocator.Instance.GetService<IUserInfoRepository>(new { context = context });
         }
 
         //[LogException]
