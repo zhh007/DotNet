@@ -18,7 +18,7 @@ namespace Demo.Service
         private DbContext fDbContext;
         private IUserInfoRepository fUserInfoRepository;
 
-        public UserInfoService(DbContext _dbContext, IUserInfoRepository _userInfoRepository)
+        public UserInfoService(DemoContext _dbContext, IUserInfoRepository _userInfoRepository)
         {
             fDbContext = _dbContext;
             fUserInfoRepository = _userInfoRepository;

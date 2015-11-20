@@ -18,7 +18,7 @@ namespace ConsoleApp
             HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
             Demo.Service.MapCreator.CreateMap();
 
-            using (DbContext context = new DemoContext())
+            using (DemoContext context = new DemoContext())
             {
                 IUserInfoService userinfoService = new UserInfoService(context, new UserInfoRepository(context));
                 UserInfoDTO dto = new UserInfoDTO();

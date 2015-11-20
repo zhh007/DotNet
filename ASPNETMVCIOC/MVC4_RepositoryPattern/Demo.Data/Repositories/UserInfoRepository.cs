@@ -12,7 +12,7 @@ namespace Demo.Data.Repositories
 {
     public class UserInfoRepository : RepositoryBase<UserInfo>, IUserInfoRepository
     {
-        public UserInfoRepository(DbContext _dbContext)
+        public UserInfoRepository(DemoContext _dbContext)
             : base(_dbContext)
         {
 
