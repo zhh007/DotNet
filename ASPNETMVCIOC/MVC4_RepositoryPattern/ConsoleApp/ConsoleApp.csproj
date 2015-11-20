@@ -61,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="readme.txt" />
     <Content Include="unity.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
