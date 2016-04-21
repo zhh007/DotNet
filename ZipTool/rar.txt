@@ -1,0 +1,1 @@
+c:\Program Files\WinRAR>rar a -k -r -s -m1 -x*\new\ -x*\a\*.jpg D:\ff\bak.rar D:\ff
