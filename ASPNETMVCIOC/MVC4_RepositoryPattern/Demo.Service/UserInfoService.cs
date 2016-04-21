@@ -120,5 +120,12 @@ namespace Demo.Service
             return Mapper.Map<List<UserInfo>, List<UserInfoDTO>>(lst);
         }
 
+        public void Dispose()
+        {
+            if(fDbContext != null)
+            {
+                fDbContext.Dispose();
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@ using Demo.Infrastructure.Validate;
 
 namespace Demo.ServiceInterface
 {
-    public interface IUserInfoService
+    public interface IUserInfoService : IDisposable
     {
         IList<UserInfoDTO> GetAll();
         UserInfoDTO GetByID(int ID);
