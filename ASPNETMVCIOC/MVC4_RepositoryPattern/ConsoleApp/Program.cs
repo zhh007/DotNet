@@ -9,6 +9,7 @@ using Demo.DTO;
 using Demo.Infrastructure;
 using Demo.Service;
 using Demo.ServiceInterface;
+using Microsoft.Practices.Unity;
 
 namespace ConsoleApp
 {
@@ -18,6 +19,9 @@ namespace ConsoleApp
         {
             HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
             Demo.Service.MapCreator.CreateMap();
+
+            var container = ServiceLocator.Instance.GetConfiguredContainer();
+            container.RegisterTypes(AllClasses.FromLoadedAssemblies(), WithMappings.FromMatchingInterface, WithName.Default, overwriteExistingMappings: true);
 
             //sample1
             //using (DemoContext context = new DemoContext())
@@ -53,7 +57,7 @@ namespace ConsoleApp
             Console.WriteLine("over.");
             Console.ReadKey();
 
-            var container = ServiceLocator.Instance.GetConfiguredContainer();
+            //var container = ServiceLocator.Instance.GetConfiguredContainer();
             container.Dispose();
         }
     }

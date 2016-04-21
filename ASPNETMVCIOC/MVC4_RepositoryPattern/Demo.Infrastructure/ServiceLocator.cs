@@ -7,6 +7,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using System.Configuration;
 using System.Reflection;
+using System.IO;
 
 namespace Demo.Infrastructure
 {
@@ -29,18 +30,24 @@ namespace Demo.Infrastructure
             string filename = string.Empty;
             try
             {
+                container = new UnityContainer();
+
                 //unity.config
                 filename = System.IO.Path.Combine(System.Threading.Thread.GetDomain().BaseDirectory, "unity.config");
-                var fileMap = new ExeConfigurationFileMap { ExeConfigFilename = filename };
-                System.Configuration.Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
-                UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection("unity");
-
-                container = new UnityContainer().LoadConfiguration(section);
+                if (File.Exists(filename))
+                {
+                    var fileMap = new ExeConfigurationFileMap { ExeConfigFilename = filename };
+                    System.Configuration.Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+                    UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection("unity");
+                    container.LoadConfiguration(section);
+                }
 
                 //web.config or app.config
-                //UnityConfigurationSection section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
-                //container = new UnityContainer();
-                //section.Configure(container);
+                UnityConfigurationSection section2 = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
+                if (section2 != null)
+                {
+                    section2.Configure(container);
+                }
             }
             catch (Exception ex)
             {
