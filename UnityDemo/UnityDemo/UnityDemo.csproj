@@ -70,6 +70,7 @@
     <Compile Include="Config\ConfigBase.cs" />
     <Compile Include="Config\ConfigManagerHandlerAttribute.cs" />
     <Compile Include="Config\ConfigManagerCallHandler.cs" />
+    <Compile Include="Config\ConfigManagerInterceptionBehavior.cs" />
     <Compile Include="Config\ConfigPropertyAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

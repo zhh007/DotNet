@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace UnityDemo.Config
 {
-    [ConfigManagerHandler]
-    public abstract class ConfigBase : MarshalByRefObject
+    //[ConfigManagerHandler]
+    public interface ConfigBase
     {
     }
 }

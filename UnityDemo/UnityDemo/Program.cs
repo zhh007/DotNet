@@ -15,17 +15,24 @@ namespace UnityDemo
         public static IUnityContainer UnityContainer = new UnityContainer();
         static void Main(string[] args)
         {
+            UnityContainer.AddNewExtension<Interception>();
+                            //.Configure<Interception>()
+                            //.SetDefaultInterceptorFor(t, new VirtualMethodInterceptor());
+
             Assembly thisAss = Assembly.GetExecutingAssembly();
             foreach (Module mod in thisAss.GetLoadedModules(false))
             {
                 foreach (Type t in mod.GetTypes())
                 {
-                    if (t.IsSubclassOf(typeof(ConfigBase)))
+                    //if (t.IsSubclassOf(typeof(ConfigBase)))
+                    if(typeof(ConfigBase) == t)
                     {
-                        UnityContainer
-                            .AddNewExtension<Interception>()
-                            .Configure<Interception>()
-                            .SetDefaultInterceptorFor(t, new VirtualMethodInterceptor());
+                        continue;
+                    }
+
+                    if(typeof(ConfigBase).IsAssignableFrom(t))
+                    {
+                        UnityContainer.RegisterType(t, t, new ContainerControlledLifetimeManager(), new Interceptor<VirtualMethodInterceptor>(), new InterceptionBehavior<ConfigManagerInterceptionBehavior>());
                     }
                 }
             }
