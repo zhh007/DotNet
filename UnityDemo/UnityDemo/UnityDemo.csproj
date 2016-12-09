@@ -67,8 +67,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NotifyPropertyChangedAttribute.cs" />
+    <Compile Include="NotifyPropertyChangedCallHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SomeEntityClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
