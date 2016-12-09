@@ -11,7 +11,7 @@ namespace UnityDemo
     public class SomeEntityClass : ConfigBase
     {
         [ConfigProperty("31E1DDE9-D028-41DC-B169-BAFC69B63003")]
-        public string StringProperty { get; set; }
+        public virtual string StringProperty { get; set; }
 
         public int IntProperty { get; set; }
 

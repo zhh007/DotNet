@@ -25,7 +25,7 @@ namespace UnityDemo
                         UnityContainer
                             .AddNewExtension<Interception>()
                             .Configure<Interception>()
-                            .SetDefaultInterceptorFor(t, new TransparentProxyInterceptor());
+                            .SetDefaultInterceptorFor(t, new VirtualMethodInterceptor());
                     }
                 }
             }
