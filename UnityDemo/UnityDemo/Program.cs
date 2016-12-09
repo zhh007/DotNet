@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
+using System.Reflection;
+using UnityDemo.Config;
 
 namespace UnityDemo
 {
@@ -13,9 +15,24 @@ namespace UnityDemo
         public static IUnityContainer UnityContainer = new UnityContainer();
         static void Main(string[] args)
         {
-            UnityContainer.AddNewExtension<Interception>()
-                .Configure<Interception>()
-                .SetDefaultInterceptorFor<SomeEntityClass>(new TransparentProxyInterceptor());
+            Assembly thisAss = Assembly.GetExecutingAssembly();
+            foreach (Module mod in thisAss.GetLoadedModules(false))
+            {
+                foreach (Type t in mod.GetTypes())
+                {
+                    if (t.IsSubclassOf(typeof(ConfigBase)))
+                    {
+                        UnityContainer
+                            .AddNewExtension<Interception>()
+                            .Configure<Interception>()
+                            .SetDefaultInterceptorFor(t, new TransparentProxyInterceptor());
+                    }
+                }
+            }
+
+            //UnityContainer.AddNewExtension<Interception>()
+            //    .Configure<Interception>()
+            //    .SetDefaultInterceptorFor<SomeEntityClass>(new TransparentProxyInterceptor());
 
             SomeEntityClass obj = UnityContainer.Resolve<SomeEntityClass>();
             Console.WriteLine(obj.StringProperty);

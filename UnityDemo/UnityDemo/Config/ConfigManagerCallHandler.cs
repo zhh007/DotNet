@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnityDemo
+namespace UnityDemo.Config
 {
     /// <summary>
     /// 配置拦截器
