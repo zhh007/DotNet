@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 
 namespace UnityDemo
 {
-    public class NotifyPropertyChangedAttribute : HandlerAttribute
+    /// <summary>
+    /// 配置拦截属性
+    /// </summary>
+    public class ConfigManagerHandlerAttribute : HandlerAttribute
     {
         readonly ICallHandler handler;
 
-        public NotifyPropertyChangedAttribute()
+        public ConfigManagerHandlerAttribute()
         {
-            handler = new NotifyPropertyChangedCallHandler();
+            handler = new ConfigManagerCallHandler();
         }
 
         public override ICallHandler CreateHandler(IUnityContainer container)
