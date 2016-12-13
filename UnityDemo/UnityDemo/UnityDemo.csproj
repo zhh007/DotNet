@@ -68,8 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\IConfiguration.cs" />
-    <Compile Include="Configuration\ConfigManagerInterceptionBehavior.cs" />
-    <Compile Include="Configuration\ConfigPropertyAttribute.cs" />
+    <Compile Include="Configuration\ConfigurationInterceptionBehavior.cs" />
+    <Compile Include="Configuration\ConfigurationItemAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SomeEntityClass.cs" />

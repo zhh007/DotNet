@@ -35,7 +35,7 @@ namespace UnityDemo
                         UnityContainer.RegisterType(t, t
                             , new ContainerControlledLifetimeManager()
                             , new Interceptor<VirtualMethodInterceptor>()
-                            , new InterceptionBehavior<ConfigManagerInterceptionBehavior>());
+                            , new InterceptionBehavior<ConfigurationInterceptionBehavior>());
                     }
                 }
             }

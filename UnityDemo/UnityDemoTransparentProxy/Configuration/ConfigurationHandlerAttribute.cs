@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnityDemoTransparentProxy.Config
+namespace UnityDemoTransparentProxy.Configuration
 {
     /// <summary>
     /// 配置拦截属性
     /// </summary>
-    public class ConfigManagerHandlerAttribute : HandlerAttribute
+    public class ConfigurationHandlerAttribute : HandlerAttribute
     {
         readonly ICallHandler handler;
 
-        public ConfigManagerHandlerAttribute()
+        public ConfigurationHandlerAttribute()
         {
-            handler = new ConfigManagerCallHandler();
+            handler = new ConfigurationCallHandler();
         }
 
         public override ICallHandler CreateHandler(IUnityContainer container)

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using UnityDemoTransparentProxy.Config;
+using UnityDemoTransparentProxy.Configuration;
 
 /// <summary>
 /// 使用Unity TransparentProxyInterceptor实现配置管理
@@ -26,7 +26,7 @@ namespace UnityDemoTransparentProxy
             {
                 foreach (Type t in mod.GetTypes())
                 {
-                    if (t.IsSubclassOf(typeof(ConfigBase)))
+                    if (t.IsSubclassOf(typeof(ConfigurationBase)))
                     {
                         interceptionConfig.SetInterceptorFor<SomeEntityClass>(new TransparentProxyInterceptor());
 

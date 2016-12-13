@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityDemoTransparentProxy.Config;
+using UnityDemoTransparentProxy.Configuration;
 
 namespace UnityDemoTransparentProxy
 {
-    public class SomeEntityClass : ConfigBase
+    public class SomeEntityClass : ConfigurationBase
     {
-        [ConfigProperty("31E1DDE9-D028-41DC-B169-BAFC69B63003")]
-        public virtual string StringProperty { get; set; }
+        [ConfigurationItem("31E1DDE9-D028-41DC-B169-BAFC69B63003")]
+        public string StringProperty { get; set; }
 
+        [ConfigurationItem("53F99EE3-C4C3-4447-BA0D-3BAF952A4EC9")]
         public int IntProperty { get; set; }
 
         public decimal DecimalProperty { get; set; }

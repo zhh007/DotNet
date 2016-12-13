@@ -6,28 +6,27 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnityDemo.Configuration
+namespace UnityDemoTransparentProxy.Configuration
 {
-    public class ConfigManagerInterceptionBehavior : IInterceptionBehavior
+    /// <summary>
+    /// 配置拦截器
+    /// </summary>
+    public class ConfigurationCallHandler : ICallHandler
     {
-        public bool WillExecute
+        public int Order
         {
             get
             {
-                return true;
+                return 0;
             }
+            set { }
         }
 
-        public IEnumerable<Type> GetRequiredInterfaces()
-        {
-            return new Type[0];
-        }
-
-        public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
+        public IMethodReturn Invoke(IMethodInvocation input, GetNextHandlerDelegate getNext)
         {
             if (IsGetPropertyMethod(input.MethodBase))
             {
-                var attr = GetConfigProperty(input.MethodBase);
+                var attr = GetConfigurationItemAttribute(input.MethodBase);
                 if (attr != null)
                 {
                     var ret = GetConfigValueById(input, attr.Id);
@@ -38,7 +37,8 @@ namespace UnityDemo.Configuration
                 }
             }
 
-            return getNext()(input, getNext);
+            IMethodReturn result = getNext.Invoke().Invoke(input, getNext);
+            return result;
         }
 
         private static bool IsSetPropertyMethod(MethodBase method)
@@ -51,14 +51,14 @@ namespace UnityDemo.Configuration
             return method.IsSpecialName && method.Name.StartsWith("get_");
         }
 
-        private ConfigPropertyAttribute GetConfigProperty(MethodBase method)
+        private ConfigurationItemAttribute GetConfigurationItemAttribute(MethodBase method)
         {
-            ConfigPropertyAttribute attr = null;
+            ConfigurationItemAttribute attr = null;
 
             var propertyName = method.Name.Substring(4);
             var target = method.ReflectedType;
             var property = target.GetProperty(propertyName);
-            attr = property.GetCustomAttribute<ConfigPropertyAttribute>(false);
+            attr = property.GetCustomAttribute<ConfigurationItemAttribute>(false);
 
             return attr;
         }

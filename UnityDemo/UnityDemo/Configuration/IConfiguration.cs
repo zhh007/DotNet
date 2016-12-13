@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace UnityDemo.Configuration
 {
-    //[ConfigManagerHandler]
     public interface IConfiguration
     {
     }

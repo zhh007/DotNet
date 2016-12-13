@@ -10,10 +10,11 @@ namespace UnityDemo
 {
     public class SomeEntityClass : IConfiguration
     {
-        [ConfigProperty("31E1DDE9-D028-41DC-B169-BAFC69B63003")]
+        [ConfigurationItem("31E1DDE9-D028-41DC-B169-BAFC69B63003")]
         public virtual string StringProperty { get; set; }
 
-        public int IntProperty { get; set; }
+        [ConfigurationItem("53F99EE3-C4C3-4447-BA0D-3BAF952A4EC9")]
+        public virtual int IntProperty { get; set; }
 
         public decimal DecimalProperty { get; set; }
 

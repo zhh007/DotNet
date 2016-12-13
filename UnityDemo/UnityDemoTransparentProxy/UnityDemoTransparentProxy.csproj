@@ -67,10 +67,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\ConfigBase.cs" />
-    <Compile Include="Config\ConfigManagerCallHandler.cs" />
-    <Compile Include="Config\ConfigManagerHandlerAttribute.cs" />
-    <Compile Include="Config\ConfigPropertyAttribute.cs" />
+    <Compile Include="Configuration\ConfigurationBase.cs" />
+    <Compile Include="Configuration\ConfigurationCallHandler.cs" />
+    <Compile Include="Configuration\ConfigurationHandlerAttribute.cs" />
+    <Compile Include="Configuration\ConfigurationItemAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SomeEntityClass.cs" />
