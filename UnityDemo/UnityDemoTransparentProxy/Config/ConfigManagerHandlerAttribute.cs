@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnityDemo.Config
+namespace UnityDemoTransparentProxy.Config
 {
     /// <summary>
     /// 配置拦截属性

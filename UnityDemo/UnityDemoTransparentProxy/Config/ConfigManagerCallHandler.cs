@@ -6,24 +6,23 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnityDemo.Config
+namespace UnityDemoTransparentProxy.Config
 {
-    public class ConfigManagerInterceptionBehavior : IInterceptionBehavior
+    /// <summary>
+    /// 配置拦截器
+    /// </summary>
+    public class ConfigManagerCallHandler : ICallHandler
     {
-        public bool WillExecute
+        public int Order
         {
             get
             {
-                return true;
+                return 0;
             }
+            set { }
         }
 
-        public IEnumerable<Type> GetRequiredInterfaces()
-        {
-            return new Type[0];
-        }
-
-        public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
+        public IMethodReturn Invoke(IMethodInvocation input, GetNextHandlerDelegate getNext)
         {
             if (IsGetPropertyMethod(input.MethodBase))
             {
@@ -38,7 +37,8 @@ namespace UnityDemo.Config
                 }
             }
 
-            return getNext()(input, getNext);
+            IMethodReturn result = getNext.Invoke().Invoke(input, getNext);
+            return result;
         }
 
         private static bool IsSetPropertyMethod(MethodBase method)

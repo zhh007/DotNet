@@ -6,39 +6,39 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnityDemo.Config
+namespace UnityDemo.Configuration
 {
-    /// <summary>
-    /// 配置拦截器
-    /// </summary>
-    public class ConfigManagerCallHandler : ICallHandler
+    public class ConfigManagerInterceptionBehavior : IInterceptionBehavior
     {
-        public int Order
+        public bool WillExecute
         {
             get
             {
-                return 0;
+                return true;
             }
-            set { }
         }
 
-        public IMethodReturn Invoke(IMethodInvocation input, GetNextHandlerDelegate getNext)
+        public IEnumerable<Type> GetRequiredInterfaces()
+        {
+            return new Type[0];
+        }
+
+        public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
         {
             if (IsGetPropertyMethod(input.MethodBase))
             {
                 var attr = GetConfigProperty(input.MethodBase);
-                if(attr != null)
+                if (attr != null)
                 {
                     var ret = GetConfigValueById(input, attr.Id);
-                    if(ret != null)
+                    if (ret != null)
                     {
                         return ret;
                     }
                 }
             }
 
-            IMethodReturn result = getNext.Invoke().Invoke(input, getNext);
-            return result;
+            return getNext()(input, getNext);
         }
 
         private static bool IsSetPropertyMethod(MethodBase method)
@@ -66,7 +66,7 @@ namespace UnityDemo.Config
         private IMethodReturn GetConfigValueById(IMethodInvocation input, string configId)
         {
             Console.WriteLine(configId);
-            if(input == null || input.MethodBase == null)
+            if (input == null || input.MethodBase == null)
             {
                 return null;
             }

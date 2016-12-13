@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using System.Reflection;
-using UnityDemo.Config;
+using UnityDemo.Configuration;
 
+/// <summary>
+/// 使用Unity VirtualMethodInterceptor实现配置管理
+/// </summary>
 namespace UnityDemo
 {
     class Program
@@ -16,30 +19,26 @@ namespace UnityDemo
         static void Main(string[] args)
         {
             UnityContainer.AddNewExtension<Interception>();
-                            //.Configure<Interception>()
-                            //.SetDefaultInterceptorFor(t, new VirtualMethodInterceptor());
 
             Assembly thisAss = Assembly.GetExecutingAssembly();
             foreach (Module mod in thisAss.GetLoadedModules(false))
             {
                 foreach (Type t in mod.GetTypes())
                 {
-                    //if (t.IsSubclassOf(typeof(ConfigBase)))
-                    if(typeof(ConfigBase) == t)
+                    if(typeof(IConfiguration) == t)
                     {
                         continue;
                     }
 
-                    if(typeof(ConfigBase).IsAssignableFrom(t))
+                    if(typeof(IConfiguration).IsAssignableFrom(t))
                     {
-                        UnityContainer.RegisterType(t, t, new ContainerControlledLifetimeManager(), new Interceptor<VirtualMethodInterceptor>(), new InterceptionBehavior<ConfigManagerInterceptionBehavior>());
+                        UnityContainer.RegisterType(t, t
+                            , new ContainerControlledLifetimeManager()
+                            , new Interceptor<VirtualMethodInterceptor>()
+                            , new InterceptionBehavior<ConfigManagerInterceptionBehavior>());
                     }
                 }
             }
-
-            //UnityContainer.AddNewExtension<Interception>()
-            //    .Configure<Interception>()
-            //    .SetDefaultInterceptorFor<SomeEntityClass>(new TransparentProxyInterceptor());
 
             SomeEntityClass obj = UnityContainer.Resolve<SomeEntityClass>();
             Console.WriteLine(obj.StringProperty);

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityDemo.Configuration;
+using UnityDemoTransparentProxy.Config;
 
-namespace UnityDemo
+namespace UnityDemoTransparentProxy
 {
-    public class SomeEntityClass : IConfiguration
+    public class SomeEntityClass : ConfigBase
     {
         [ConfigProperty("31E1DDE9-D028-41DC-B169-BAFC69B63003")]
         public virtual string StringProperty { get; set; }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnityDemo.Config
+namespace UnityDemoTransparentProxy.Config
 {
-    //[ConfigManagerHandler]
-    public interface ConfigBase
+    [ConfigManagerHandler]
+    public abstract class ConfigBase : MarshalByRefObject
     {
     }
 }
