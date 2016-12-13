@@ -28,7 +28,13 @@ namespace UnityDemoTransparentProxy
                 {
                     if (t.IsSubclassOf(typeof(ConfigurationBase)))
                     {
-                        interceptionConfig.SetInterceptorFor<SomeEntityClass>(new TransparentProxyInterceptor());
+                        //1.方法一
+                        //interceptionConfig.SetInterceptorFor(t, new TransparentProxyInterceptor());
+
+                        //2.方法二
+                        //UnityContainer.RegisterType(t, t)
+                        //    .Configure<Interception>()
+                        //    .SetInterceptorFor(t, new TransparentProxyInterceptor());
 
                         //config error
                         //UnityContainer.RegisterType(t, t,
