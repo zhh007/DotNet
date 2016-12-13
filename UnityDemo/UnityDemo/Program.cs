@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
+using Microsoft.Practices.Unity.Configuration;
 using System.Reflection;
 using UnityDemo.Configuration;
+using UnityComm;
 
 /// <summary>
 /// 使用Unity VirtualMethodInterceptor实现配置管理
@@ -20,23 +22,16 @@ namespace UnityDemo
         {
             UnityContainer.AddNewExtension<Interception>();
 
-            Assembly thisAss = Assembly.GetExecutingAssembly();
-            foreach (Module mod in thisAss.GetLoadedModules(false))
-            {
-                foreach (Type t in mod.GetTypes())
-                {
-                    if(typeof(IConfiguration) == t)
-                    {
-                        continue;
-                    }
+            var cls = AllClasses.FromAssembliesInBasePath().InterfaceFrom<IConfiguration>();
 
-                    if(typeof(IConfiguration).IsAssignableFrom(t))
-                    {
-                        UnityContainer.RegisterType(t, t
-                            , new ContainerControlledLifetimeManager()
-                            , new Interceptor<VirtualMethodInterceptor>()
-                            , new InterceptionBehavior<ConfigurationInterceptionBehavior>());
-                    }
+            foreach (Type t in cls)
+            {
+                if (typeof(IConfiguration).IsAssignableFrom(t))
+                {
+                    UnityContainer.RegisterType(t, t
+                        , new ContainerControlledLifetimeManager()
+                        , new Interceptor<VirtualMethodInterceptor>()
+                        , new InterceptionBehavior<ConfigurationInterceptionBehavior>());
                 }
             }
 
@@ -46,6 +41,7 @@ namespace UnityDemo
 
             Console.ReadKey();
         }
+
     }
 }
 /*

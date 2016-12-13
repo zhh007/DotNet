@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDemo", "UnityDemo\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDemoTransparentProxy", "UnityDemoTransparentProxy\UnityDemoTransparentProxy.csproj", "{61CDCA8E-F503-4DF4-A407-8AEA3430E5BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityComm", "UnityComm\UnityComm.csproj", "{F7A853EE-19E5-4DCE-94F5-D22E659FF343}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{61CDCA8E-F503-4DF4-A407-8AEA3430E5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61CDCA8E-F503-4DF4-A407-8AEA3430E5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61CDCA8E-F503-4DF4-A407-8AEA3430E5BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A853EE-19E5-4DCE-94F5-D22E659FF343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A853EE-19E5-4DCE-94F5-D22E659FF343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A853EE-19E5-4DCE-94F5-D22E659FF343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A853EE-19E5-4DCE-94F5-D22E659FF343}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

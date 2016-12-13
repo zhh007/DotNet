@@ -20,7 +20,7 @@ namespace UnityDemo.Configuration
 
         public IEnumerable<Type> GetRequiredInterfaces()
         {
-            return new Type[0];
+            return Type.EmptyTypes;
         }
 
         public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)

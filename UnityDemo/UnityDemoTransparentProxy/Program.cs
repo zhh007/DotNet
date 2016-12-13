@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using UnityComm;
 using UnityDemoTransparentProxy.Configuration;
 
 /// <summary>
@@ -21,27 +22,22 @@ namespace UnityDemoTransparentProxy
             UnityContainer.AddNewExtension<Interception>();
             var interceptionConfig = UnityContainer.Configure<Interception>();
 
-            Assembly thisAss = Assembly.GetExecutingAssembly();
-            foreach (Module mod in thisAss.GetLoadedModules(false))
+            var cls = AllClasses.FromAssembliesInBasePath().ClassFrom<ConfigurationBase>();
+
+            foreach (Type t in cls)
             {
-                foreach (Type t in mod.GetTypes())
-                {
-                    if (t.IsSubclassOf(typeof(ConfigurationBase)))
-                    {
-                        //1.方法一
-                        //interceptionConfig.SetInterceptorFor(t, new TransparentProxyInterceptor());
+                //1.方法一
+                //interceptionConfig.SetInterceptorFor(t, new TransparentProxyInterceptor());
 
-                        //2.方法二
-                        //UnityContainer.RegisterType(t, t)
-                        //    .Configure<Interception>()
-                        //    .SetInterceptorFor(t, new TransparentProxyInterceptor());
+                //2.方法二
+                UnityContainer.RegisterType(t, t)
+                    .Configure<Interception>()
+                    .SetInterceptorFor(t, new TransparentProxyInterceptor());
 
-                        //config error
-                        //UnityContainer.RegisterType(t, t,
-                        //    new ContainerControlledLifetimeManager(),
-                        //    new Interceptor<TransparentProxyInterceptor>());
-                    }
-                }
+                //config error
+                //UnityContainer.RegisterType(t, t,
+                //    new ContainerControlledLifetimeManager(),
+                //    new Interceptor<TransparentProxyInterceptor>());
             }
 
             SomeEntityClass obj = UnityContainer.Resolve<SomeEntityClass>();
