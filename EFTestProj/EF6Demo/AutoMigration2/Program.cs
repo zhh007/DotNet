@@ -18,7 +18,7 @@ namespace AutoMigration2
                 var student = context.Set<Student>().FirstOrDefault(p => p.Name == "abc");
                 if (student != null)
                 {
-                    Console.WriteLine("{0}学号{1}.", student.Name, "");
+                    Console.WriteLine("{0}学号{1}.", student.Name, student.No);
                 }
             }
             Console.ReadKey();

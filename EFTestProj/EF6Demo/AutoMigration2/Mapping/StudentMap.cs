@@ -17,14 +17,14 @@ namespace AutoMigration2.Mapping
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(t => t.Name)
                 .HasMaxLength(20);
-            //this.Property(t => t.No)
-            //    .HasMaxLength(10);
+            this.Property(t => t.No)
+                .HasMaxLength(10);
 
             // Table & Column Mappings
             this.ToTable("Student", "dbo");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Name).HasColumnName("Name");
-            //this.Property(t => t.No).HasColumnName("No");
+            this.Property(t => t.No).HasColumnName("No");
 
             // Relationships
         }

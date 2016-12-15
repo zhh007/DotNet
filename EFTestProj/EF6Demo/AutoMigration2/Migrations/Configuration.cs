@@ -19,8 +19,10 @@ namespace AutoMigration2.Migrations
 
             context.Set<Student>().AddOrUpdate(
               p => p.Name,
-              new Student { Name = "abc"
-                //, No = "s0002"
+              new Student
+              {
+                  Name = "abc",
+                  No = "s0001"
               }
             );
         }

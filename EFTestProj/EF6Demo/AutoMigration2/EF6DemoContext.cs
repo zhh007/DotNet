@@ -13,8 +13,7 @@ namespace AutoMigration2
     {
         static EF6DemoContext()
         {
-            //Database.SetInitializer<EF6DemoContext>(null);
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<EF6DemoContext, Migrations.Configuration>());
+            Database.SetInitializer<EF6DemoContext>(null);
         }
 
         public EF6DemoContext()
