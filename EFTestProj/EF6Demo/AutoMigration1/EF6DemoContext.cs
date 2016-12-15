@@ -10,14 +10,13 @@ namespace AutoMigration1
 {
     public partial class EF6DemoContext : DbContext
     {
-        static EF6DemoContext()
-        {
-            //Database.SetInitializer<EF6DemoContext>(null);
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EF6DemoContext, Migrations.Configuration>());
-        }
+        //static EF6DemoContext()
+        //{
+        //    Database.SetInitializer<EF6DemoContext>(null);
+        //}
 
         public EF6DemoContext()
-            : base("Name=EF6Demo")
+            : base("EF6Demo")
         {
         }
 

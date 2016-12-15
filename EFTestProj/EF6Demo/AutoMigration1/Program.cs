@@ -1,6 +1,7 @@
 ﻿using AutoMigration1.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,12 @@ namespace AutoMigration1
     {
         static void Main(string[] args)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EF6DemoContext, Migrations.Configuration>());
+
             using (EF6DemoContext context = new EF6DemoContext())
             {
-                context.Database.Initialize(false);
+                //可以不写
+                //context.Database.Initialize(false);
 
                 var student = context.Set<Student>().FirstOrDefault(p => p.Name == "abc");
                 if(student != null)
