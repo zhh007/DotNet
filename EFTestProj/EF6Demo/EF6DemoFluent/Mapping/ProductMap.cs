@@ -22,6 +22,8 @@ namespace EF6DemoFluent.Mapping
                 .HasPrecision(18, 4)
                 .IsRequired();
 
+            this.Ignore(t => t.Remark);
+
             // Table & Column Mappings
             this.ToTable("Product", "dbo");
             this.Property(t => t.ProductID).HasColumnName("ProductID");
