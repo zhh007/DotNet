@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF6Demo", "EF6Demo\EF6Demo.csproj", "{5A5EDDA3-A9A1-4EF2-B272-00320003FC3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMigration1", "AutoMigration1\AutoMigration1.csproj", "{F67A0389-0314-4CAE-A7D3-5DFBC799238A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A5EDDA3-A9A1-4EF2-B272-00320003FC3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A5EDDA3-A9A1-4EF2-B272-00320003FC3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A5EDDA3-A9A1-4EF2-B272-00320003FC3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A5EDDA3-A9A1-4EF2-B272-00320003FC3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F67A0389-0314-4CAE-A7D3-5DFBC799238A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F67A0389-0314-4CAE-A7D3-5DFBC799238A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F67A0389-0314-4CAE-A7D3-5DFBC799238A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F67A0389-0314-4CAE-A7D3-5DFBC799238A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
