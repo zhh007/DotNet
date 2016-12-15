@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.txt = readme.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF6DemoFluent", "EF6DemoFluent\EF6DemoFluent.csproj", "{47164F1A-90C1-4FB8-8E7A-3683D77058F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{7839E91E-92D4-453C-87C1-0E5303B6A7B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7839E91E-92D4-453C-87C1-0E5303B6A7B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7839E91E-92D4-453C-87C1-0E5303B6A7B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47164F1A-90C1-4FB8-8E7A-3683D77058F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47164F1A-90C1-4FB8-8E7A-3683D77058F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47164F1A-90C1-4FB8-8E7A-3683D77058F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47164F1A-90C1-4FB8-8E7A-3683D77058F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
