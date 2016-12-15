@@ -11,13 +11,8 @@ namespace AutoMigration2
 {
     public partial class EF6DemoContext : DbContext
     {
-        static EF6DemoContext()
-        {
-            Database.SetInitializer<EF6DemoContext>(null);
-        }
-
         public EF6DemoContext()
-            : base("Name=EF6Demo")
+            : base("EF6Demo")
         {
         }
 
