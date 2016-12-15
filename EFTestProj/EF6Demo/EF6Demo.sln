@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF6Demo", "EF6Demo\EF6Demo.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMigration1", "AutoMigration1\AutoMigration1.csproj", "{F67A0389-0314-4CAE-A7D3-5DFBC799238A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMigration2", "AutoMigration2\AutoMigration2.csproj", "{7839E91E-92D4-453C-87C1-0E5303B6A7B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F67A0389-0314-4CAE-A7D3-5DFBC799238A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F67A0389-0314-4CAE-A7D3-5DFBC799238A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F67A0389-0314-4CAE-A7D3-5DFBC799238A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7839E91E-92D4-453C-87C1-0E5303B6A7B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7839E91E-92D4-453C-87C1-0E5303B6A7B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7839E91E-92D4-453C-87C1-0E5303B6A7B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7839E91E-92D4-453C-87C1-0E5303B6A7B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
