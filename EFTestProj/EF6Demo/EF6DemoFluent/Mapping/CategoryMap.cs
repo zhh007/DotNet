@@ -25,6 +25,10 @@ namespace EF6DemoFluent.Mapping
             this.Property(t => t.CategoryName).HasColumnName("CategoryName");
 
             // Relationships
+            this.HasOptional(t => t.Parent)
+                .WithMany(d => d.Children)
+                .HasForeignKey(t => t.ParentID);
+
         }
     }
 }

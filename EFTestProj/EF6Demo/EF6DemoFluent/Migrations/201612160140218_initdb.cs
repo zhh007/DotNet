@@ -13,8 +13,11 @@ namespace EF6DemoFluent.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         CategoryName = c.String(nullable: false, maxLength: 20),
+                        ParentID = c.Int(),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Category", t => t.ParentID)
+                .Index(t => t.ParentID);
             
             CreateTable(
                 "dbo.Product",
@@ -88,10 +91,12 @@ namespace EF6DemoFluent.Migrations
             DropForeignKey("dbo.RoleUsers", "User_UserID", "dbo.User");
             DropForeignKey("dbo.RoleUsers", "Role_RoleID", "dbo.Roles");
             DropForeignKey("dbo.Product", "CategoryID", "dbo.Category");
+            DropForeignKey("dbo.Category", "ParentID", "dbo.Category");
             DropIndex("dbo.RoleUsers", new[] { "User_UserID" });
             DropIndex("dbo.RoleUsers", new[] { "Role_RoleID" });
             DropIndex("dbo.UserProfile", new[] { "ProfileID" });
             DropIndex("dbo.Product", new[] { "CategoryID" });
+            DropIndex("dbo.Category", new[] { "ParentID" });
             DropTable("dbo.RoleUsers");
             DropTable("dbo.Roles");
             DropTable("dbo.User");
