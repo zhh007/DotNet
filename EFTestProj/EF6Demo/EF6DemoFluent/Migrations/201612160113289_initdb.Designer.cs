@@ -13,7 +13,7 @@ namespace EF6DemoFluent.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201612150849018_initdb"; }
+            get { return "201612160113289_initdb"; }
         }
         
         string IMigrationMetadata.Source

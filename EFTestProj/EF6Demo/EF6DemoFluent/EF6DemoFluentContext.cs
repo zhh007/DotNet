@@ -20,6 +20,8 @@ namespace EF6DemoFluent
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -33,6 +35,9 @@ namespace EF6DemoFluent
 
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new ProductMap());
+
+            modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new UserProfileMap());
 
             //modelBuilder.Entity<Category>()
             //   .HasMany(t => t.Products)
