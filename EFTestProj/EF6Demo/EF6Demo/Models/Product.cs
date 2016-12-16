@@ -20,12 +20,13 @@ namespace EF6Demo.Models
         public decimal UnitPrice { get; set; }
 
         [Column("CategoryID")]
+        [ForeignKey("Category")]
         public int CategoryID { get; set; }
 
         [NotMapped]
         public string Remark { get; set; }
 
-        [ForeignKey("CategoryID")]
+        //[ForeignKey("CategoryID")]
         public virtual Category Category { get; set; }
     }
 }
