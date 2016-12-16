@@ -53,13 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF6DemoContext.cs" />
-    <Compile Include="Migrations\201612160049054_initdb.cs" />
-    <Compile Include="Migrations\201612160049054_initdb.Designer.cs">
-      <DependentUpon>201612160049054_initdb.cs</DependentUpon>
+    <Compile Include="Migrations\201612160119250_initdb.cs" />
+    <Compile Include="Migrations\201612160119250_initdb.Designer.cs">
+      <DependentUpon>201612160119250_initdb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Program.cs" />
@@ -70,8 +71,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612160049054_initdb.resx">
-      <DependentUpon>201612160049054_initdb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612160119250_initdb.resx">
+      <DependentUpon>201612160119250_initdb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

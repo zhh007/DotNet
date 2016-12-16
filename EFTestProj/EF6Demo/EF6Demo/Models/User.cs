@@ -16,5 +16,11 @@ namespace EF6Demo.Models
         public bool? IsValid { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
+
+        public User()
+        {
+            this.Roles = new List<Role>();
+        }
     }
 }
