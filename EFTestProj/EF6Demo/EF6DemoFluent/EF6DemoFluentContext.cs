@@ -39,6 +39,10 @@ namespace EF6DemoFluent
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new UserProfileMap());
 
+            modelBuilder.Configurations.Add(new RoleMap());
+
+            modelBuilder.Configurations.Add(new FamilyMemberMap());
+
             //modelBuilder.Entity<Category>()
             //   .HasMany(t => t.Products)
             //   .WithRequired(t => t.Category)

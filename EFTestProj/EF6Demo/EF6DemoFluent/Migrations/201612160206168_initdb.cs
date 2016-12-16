@@ -62,43 +62,73 @@ namespace EF6DemoFluent.Migrations
                 .PrimaryKey(t => t.UserID);
             
             CreateTable(
-                "dbo.Roles",
+                "dbo.Role",
                 c => new
                     {
                         RoleID = c.Int(nullable: false, identity: true),
-                        RoleName = c.String(),
+                        RoleName = c.String(maxLength: 50),
                     })
                 .PrimaryKey(t => t.RoleID);
             
             CreateTable(
-                "dbo.RoleUsers",
+                "dbo.Family",
                 c => new
                     {
-                        Role_RoleID = c.Int(nullable: false),
-                        User_UserID = c.Int(nullable: false),
+                        FamilyID = c.Int(nullable: false, identity: true),
+                        Name = c.String(maxLength: 50),
+                        Sex = c.Boolean(),
+                        Birthday = c.DateTime(),
                     })
-                .PrimaryKey(t => new { t.Role_RoleID, t.User_UserID })
-                .ForeignKey("dbo.Roles", t => t.Role_RoleID)
-                .ForeignKey("dbo.User", t => t.User_UserID)
-                .Index(t => t.Role_RoleID)
-                .Index(t => t.User_UserID);
+                .PrimaryKey(t => t.FamilyID);
+            
+            CreateTable(
+                "dbo.UserRole",
+                c => new
+                    {
+                        RoleID = c.Int(nullable: false),
+                        UserID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.RoleID, t.UserID })
+                .ForeignKey("dbo.Role", t => t.RoleID)
+                .ForeignKey("dbo.User", t => t.UserID)
+                .Index(t => t.RoleID)
+                .Index(t => t.UserID);
+            
+            CreateTable(
+                "dbo.FamilyMemberRelationship",
+                c => new
+                    {
+                        ParentID = c.Int(nullable: false),
+                        ChildID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.ParentID, t.ChildID })
+                .ForeignKey("dbo.Family", t => t.ParentID)
+                .ForeignKey("dbo.Family", t => t.ChildID)
+                .Index(t => t.ParentID)
+                .Index(t => t.ChildID);
             
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.FamilyMemberRelationship", "ChildID", "dbo.Family");
+            DropForeignKey("dbo.FamilyMemberRelationship", "ParentID", "dbo.Family");
             DropForeignKey("dbo.UserProfile", "ProfileID", "dbo.User");
-            DropForeignKey("dbo.RoleUsers", "User_UserID", "dbo.User");
-            DropForeignKey("dbo.RoleUsers", "Role_RoleID", "dbo.Roles");
+            DropForeignKey("dbo.UserRole", "UserID", "dbo.User");
+            DropForeignKey("dbo.UserRole", "RoleID", "dbo.Role");
             DropForeignKey("dbo.Product", "CategoryID", "dbo.Category");
             DropForeignKey("dbo.Category", "ParentID", "dbo.Category");
-            DropIndex("dbo.RoleUsers", new[] { "User_UserID" });
-            DropIndex("dbo.RoleUsers", new[] { "Role_RoleID" });
+            DropIndex("dbo.FamilyMemberRelationship", new[] { "ChildID" });
+            DropIndex("dbo.FamilyMemberRelationship", new[] { "ParentID" });
+            DropIndex("dbo.UserRole", new[] { "UserID" });
+            DropIndex("dbo.UserRole", new[] { "RoleID" });
             DropIndex("dbo.UserProfile", new[] { "ProfileID" });
             DropIndex("dbo.Product", new[] { "CategoryID" });
             DropIndex("dbo.Category", new[] { "ParentID" });
-            DropTable("dbo.RoleUsers");
-            DropTable("dbo.Roles");
+            DropTable("dbo.FamilyMemberRelationship");
+            DropTable("dbo.UserRole");
+            DropTable("dbo.Family");
+            DropTable("dbo.Role");
             DropTable("dbo.User");
             DropTable("dbo.UserProfile");
             DropTable("dbo.Product");
