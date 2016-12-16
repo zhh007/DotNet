@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EF6Query.Models;
+using EF6Query.Samples;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,23 @@ namespace EF6Query
     {
         static void Main(string[] args)
         {
+            //s1_Insert.Run();
+
+            //s2_Update.Run();
+
+            //s3_Delete.Run();
+
+            //s4_LoadRef.Run();
+
+            //s5_QueryView.Run();
+
+            s6_RunSql.Run();
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("over!");
+            Console.ReadKey();
         }
     }
 }
