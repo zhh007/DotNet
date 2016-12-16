@@ -58,14 +58,42 @@ namespace EF6DemoFluent.Migrations
                     })
                 .PrimaryKey(t => t.UserID);
             
+            CreateTable(
+                "dbo.Roles",
+                c => new
+                    {
+                        RoleID = c.Int(nullable: false, identity: true),
+                        RoleName = c.String(),
+                    })
+                .PrimaryKey(t => t.RoleID);
+            
+            CreateTable(
+                "dbo.RoleUsers",
+                c => new
+                    {
+                        Role_RoleID = c.Int(nullable: false),
+                        User_UserID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Role_RoleID, t.User_UserID })
+                .ForeignKey("dbo.Roles", t => t.Role_RoleID)
+                .ForeignKey("dbo.User", t => t.User_UserID)
+                .Index(t => t.Role_RoleID)
+                .Index(t => t.User_UserID);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.UserProfile", "ProfileID", "dbo.User");
+            DropForeignKey("dbo.RoleUsers", "User_UserID", "dbo.User");
+            DropForeignKey("dbo.RoleUsers", "Role_RoleID", "dbo.Roles");
             DropForeignKey("dbo.Product", "CategoryID", "dbo.Category");
+            DropIndex("dbo.RoleUsers", new[] { "User_UserID" });
+            DropIndex("dbo.RoleUsers", new[] { "Role_RoleID" });
             DropIndex("dbo.UserProfile", new[] { "ProfileID" });
             DropIndex("dbo.Product", new[] { "CategoryID" });
+            DropTable("dbo.RoleUsers");
+            DropTable("dbo.Roles");
             DropTable("dbo.User");
             DropTable("dbo.UserProfile");
             DropTable("dbo.Product");

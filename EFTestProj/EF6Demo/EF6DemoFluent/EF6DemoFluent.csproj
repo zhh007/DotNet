@@ -55,15 +55,17 @@
     <Compile Include="EF6DemoFluentContext.cs" />
     <Compile Include="Mapping\CategoryMap.cs" />
     <Compile Include="Mapping\ProductMap.cs" />
+    <Compile Include="Mapping\RoleMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Mapping\UserProfileMap.cs" />
-    <Compile Include="Migrations\201612160113289_initdb.cs" />
-    <Compile Include="Migrations\201612160113289_initdb.Designer.cs">
-      <DependentUpon>201612160113289_initdb.cs</DependentUpon>
+    <Compile Include="Migrations\201612160128202_initdb.cs" />
+    <Compile Include="Migrations\201612160128202_initdb.Designer.cs">
+      <DependentUpon>201612160128202_initdb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Program.cs" />
@@ -74,8 +76,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612160113289_initdb.resx">
-      <DependentUpon>201612160113289_initdb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612160128202_initdb.resx">
+      <DependentUpon>201612160128202_initdb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
