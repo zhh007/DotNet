@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF6QueryContext.cs" />
+    <Compile Include="Mapping\ProductMap.cs" />
     <Compile Include="Mapping\RoleMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Mapping\UserWithRoleMap.cs" />
@@ -60,7 +61,12 @@
     <Compile Include="Migrations\201612160733519_initdb.Designer.cs">
       <DependentUpon>201612160733519_initdb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612190904165_addProduct.cs" />
+    <Compile Include="Migrations\201612190904165_addProduct.Designer.cs">
+      <DependentUpon>201612190904165_addProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserWithRole.cs" />
@@ -72,6 +78,7 @@
     <Compile Include="Samples\s4_LoadRef.cs" />
     <Compile Include="Samples\s5_QueryView.cs" />
     <Compile Include="Samples\s6_RunSql.cs" />
+    <Compile Include="Samples\s7_Concurrency.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -85,6 +92,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612160733519_initdb.resx">
       <DependentUpon>201612160733519_initdb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612190904165_addProduct.resx">
+      <DependentUpon>201612190904165_addProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

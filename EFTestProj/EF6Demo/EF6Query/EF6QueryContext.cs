@@ -28,6 +28,8 @@ namespace EF6Query
 
         public DbSet<UserWithRole> UserWithRoles { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -38,6 +40,8 @@ namespace EF6Query
             modelBuilder.Configurations.Add(new RoleMap());
 
             modelBuilder.Configurations.Add(new UserWithRoleMap());
+
+            modelBuilder.Configurations.Add(new ProductMap());
         }
     }
 }

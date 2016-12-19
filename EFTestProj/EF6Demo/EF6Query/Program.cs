@@ -22,7 +22,9 @@ namespace EF6Query
 
             //s5_QueryView.Run();
 
-            s6_RunSql.Run();
+            //s6_RunSql.Run();
+
+            s7_Concurrency.Run();
 
             Console.WriteLine();
             Console.WriteLine();
