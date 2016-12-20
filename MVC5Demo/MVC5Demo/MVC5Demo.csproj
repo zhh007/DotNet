@@ -123,6 +123,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Filters\AuthorizationPrivilegeFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -168,6 +169,8 @@
     <Content Include="Views\Blog\_List.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Weather\ShowAsync.cshtml" />
+    <Content Include="Views\Weather\ShowLongTaskAsync.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
