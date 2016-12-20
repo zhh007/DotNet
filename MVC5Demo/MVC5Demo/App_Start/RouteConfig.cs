@@ -14,10 +14,19 @@ namespace MVC5Demo
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "blog",
+                url: "blog/{year}/{month}",
+                defaults: new { controller = "Blog", action = "Show", year = DateTime.Now.Year, month = DateTime.Now.Month },
+                constraints: new { year = @"\d{4}", month = @"\d{2}" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
         }
     }
 }
