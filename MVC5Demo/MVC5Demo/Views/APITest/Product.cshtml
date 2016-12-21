@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "Product";
+}
+
+<div class="page-header">
+    <h1>Products</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Products</h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled" data-bind="foreach: products">
+                    <li>
+                        <strong><span data-bind="text: Name"></span></strong>
+                        (<span data-bind="text: Category"></span>)
+                        : ￥<span data-bind="text: Price"></span>
+                        <small><a href="#" data-bind="click: $parent.getDetail">Details</a></small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+    </div>
+    <!-- ko if:detail() -->
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Detail</h2>
+            </div>
+            <table class="table">
+                <tr><td>Name</td><td data-bind="text: detail().Name"></td></tr>
+                <tr><td>Category</td><td data-bind="text: detail().Category"></td></tr>
+                <tr><td>Price</td><td data-bind="text: detail().Price"></td></tr>
+            </table>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Add Product</h2>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit: addProduct">
+                    <div class="form-group" data-bind="with: newProduct">
+                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName" data-bind="value:Name" />
+                        </div>
+
+                        <label for="inputCategory" class="col-sm-2 control-label">Category</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCategory" data-bind="value:Category" />
+                        </div>
+
+                        <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputPrice" data-bind="value:Price" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    var ProductModel = function () {
+        var self = this;
+
+        self.Name = ko.observable(),
+        self.Category = ko.observable(),
+        self.Price = ko.observable()
+    }
+    var ViewModel = function () {
+        var self = this;
+        self.products = ko.observableArray();
+        self.error = ko.observable();
+        self.detail = ko.observable();
+        self.newProduct = ko.observable(new ProductModel());
+
+        var productUri = '/api/Product/';
+
+        function ajaxHelper(uri, method, data) {
+            self.error(''); // Clear error message
+            return $.ajax({
+                type: method,
+                url: uri,
+                dataType: 'json',
+                contentType: 'application/json',
+                data: data ? JSON.stringify(data) : null
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                if (jqXHR.responseJSON) {
+                    debugger;
+                    self.error(jqXHR.responseJSON.Message);
+                } else {
+                    self.error(jqXHR.responseText);
+                }
+                
+            });
+        }
+
+        function getAll() {
+            ajaxHelper(productUri, 'GET').done(function (data) {
+                self.products(data);
+            });
+        }
+
+        self.getDetail = function (item) {
+            ajaxHelper(productUri + item.Id, 'GET').done(function (data) {
+                self.detail(data);
+            });
+        }
+
+        self.addProduct = function (formElement) {
+            //debugger;
+            var product = {
+                Name: self.newProduct().Name(),
+                Category: self.newProduct().Category(),
+                Price: self.newProduct().Price()
+            };
+
+            ajaxHelper(productUri, 'POST', product).done(function (item) {
+                self.products.push(item);
+                self.newProduct(new ProductModel());
+            });
+        }
+
+        // Fetch the initial data.
+        getAll();
+    };
+
+    ko.applyBindings(new ViewModel());
+</script>
+}

@@ -27,6 +27,10 @@ namespace MVC5Demo
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/comm").Include(
+                    "~/Scripts/knockout-3.4.0.js"
+                ));
+
             //BundleTable.EnableOptimizations = true;
         }
     }
