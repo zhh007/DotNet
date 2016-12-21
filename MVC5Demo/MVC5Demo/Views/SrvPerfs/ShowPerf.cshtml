@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ShowPerf";
+}
+
+<div class="row page_header">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="~/Home/Index">控制台</a></li>
+            <li class="active">运行状态</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row" data-bind="foreach:counters">
+            <div class="col-md-12">
+                <h2 data-bind="text:name"></h2>
+                <canvas width="800" height="100" data-bind="attr:{'id': name}"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+    </div>
+</div>
+@*<div class="row">
+        <div class="col-md-4">
+            <input type="text" placeholder="Message" data-bind="value:message" />
+            <button class="btn btn-primary" data-bind="click:sendMessage">Send</button>
+        </div>
+        <div class="col-md-4">
+            <div data-bind="foreach:messages">
+                <div data-bind="text: $data"></div>
+            </div>
+        </div>
+    </div>*@
+
+@section scripts{
+    <script src="~/Scripts/require.js" data-main="@Href("~/Scripts/perfClient.js")"></script>
+}
