@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,8 @@ namespace ClearProjDir
             sb.AppendLine("trace");
             sb.AppendLine("exceptionlog");
             sb.AppendLine("UploadFiles");
+            sb.AppendLine("bin");
+            sb.AppendLine("obj");
             txtSetting.Text = sb.ToString();
         }
 
@@ -98,6 +101,18 @@ namespace ClearProjDir
                 regList.Add(new Regex(regStr));
             }
 
+            paths.Clear();
+            //this.lvResult.Clear();
+            //this.lvResult.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            //this.columnHeader2,
+            //this.columnHeader1});
+
+            this.BeginInvoke(new Action(delegate ()
+            {
+                while (lvResult.Items.Count > 0)
+                    lvResult.Items.RemoveAt(0);
+            }));
+
             StatusLabel.Text = "正在扫描...";
             btnSearch.Enabled = false;
             btnBrowser.Enabled = false;
@@ -156,7 +171,7 @@ namespace ClearProjDir
                     lvResult.Items.RemoveAt(lvResult.CheckedIndices[i]);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
@@ -265,6 +280,8 @@ namespace ClearProjDir
             li.SubItems[0].Text = "";
             li.SubItems.Add(file.FullName);
             this.lvResult.Items.Add(li);
+
+            Trace.WriteLine(file.FullName);
         }
         private void UpdateListViewByFolder(System.IO.DirectoryInfo folder)
         {
@@ -273,6 +290,8 @@ namespace ClearProjDir
             li.SubItems[0].Text = "";
             li.SubItems.Add(folder.FullName);
             this.lvResult.Items.Add(li);
+
+            Trace.WriteLine(folder.FullName);
         }
         private void ShowPath(string path)
         {
