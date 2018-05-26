@@ -181,7 +181,7 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
-/ClearTFSBinding/ClearTFSBinding/bin
-/ClearTFSBinding/ClearTFSBinding/obj
-/ASPNETMVCIOC/MVC4_RepositoryPattern/.vs/config
-/ASPNETMVCIOC/MVC4_Unity/.vs/config
+bin/
+obj/
+.vs/
+*.cache
